@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "motivational-audios-by-muniba",
+  "private_key_id": "88807251dd84c7938425200bd46eefc8df318172",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDTrgKu7/dvkvLD\nsZogIYWReCfoCeW7WYxlw/xu3sVybFoMszRpMCDKyUvNqUmhlerx1ViYGLPc8bG6\nyPtA9/abbw286yMOJioM97LK5yGc+hRsAPQGxzMs7kZUn1aGNeUtOdBssOAPiBqR\nrk487CwYE4nJiWuqZbt1tz68GdOM2s82TAJd4Wa7cwXgNsGpwgF/8DokHpBE9W/X\nPymG5/bA/1LsayR/XGSEL224Q2x6X2M0wJvqXA9buRFJeDkZcI6kOLvaT9Hig6mG\n+eZRMfGfUjoKkTjscMIKUZB1aRhuT0joh/Lbyoxo//sg2GOfrhG8LMrHak5vB1u6\nrlvXJlZpAgMBAAECggEACY/sRhvH+S3Rsp5kwHvTLVGYt+YujwqKCZTTY+zDTZpw\nbO9xeCj46kAyoO07SsXbcaY6FNDU2y+94BqxIuuwo6/eFoEmub5mmuRbmsfbIFy5\nrHFUlLPN74MqASubfH+VxTe93xMUZA85aAhQN3dRvJqxWD3Rc8aZs8Ud2+BsyomI\nyU2ukxiMFBhsnRKFEwmLrgXjrQSNXdfAeIG3ZicMuPM9oGkR/d0JomRTJrYZsdW1\npaEwzepDU4codiO45mEH4dEdHimLwrDLkVnyPSZfG7+AxUzJDXzb9IvzsZhZw7WC\nzbDf8KJqI7X3rSXADzZBwPtR23LCcCbAdwHGK70lgQKBgQD6aCbqsWPqVYmh0ygK\n/rqAwcvWQBYu5jW4J5TsF3kxG3OCrFMJax6xt6kmHdbvyDRQRYnEebMno9p8SETL\nlZ4+Zkt5iCO2KJoK+i1nej7JQtvL/TBYoGDH3Jm0GT9I2IA5QBw0ykQnHqz+749X\nmcaKY7qYLzzTPPbQXHWchld2CQKBgQDYaGnZIW7QWZbV2SmuGjjF6hBa0bll9lLo\npnCHNQZ/bnd8Zx6DXrDV/8M9GACfHgzahoLFAy45UpGqjb67Bzi3gKPksPl8Vo0z\nqHf2Hon8Sx2JAVqepC9UB/AiGHO2lvPPhYOY7ZC0kv6ZLBp2xp91FEzE7MfBw6q2\nthmD/qz1YQKBgQDNx4ObwNVsQIkPXHh+uKDJqPj7A8V3GyYwRQ7kCdJFYdrGGxlO\nFyKtR1IRCdqVSIB9KvgxZxWsUMH++mDWsQjPHL+PiypVyv30YW2oqNQqDvCTrWjq\nnDmMZSRG1aylD44n/iBv3XyubU4bXwD8K1n2Zkh0QfWJXoMx7ZmVXO1JCQKBgQC6\ndUR2G/NRu09WFBVweBFgnWrYBYm7i4AmCno8VPizRWfYHTVSNX0h9YuwEQVAE/E5\nO9pii3oBU95EWHr0xKUens0X11AuzJg+4THzMp7rbYEWMb91nrtUqL5DclQJB4ks\nzbn0QwSCQYDyUui+XCa6BvKaXfVDQybM5JuZeg5mIQKBgQDdBKuOfO+Blul2GUbj\nauJCEZwmpcUM94h2lbsRu9nivYL72JTgFKN7txhru16vpuXfniPkioyqgKLW8lgJ\nLrrwVqbsztI5dp6zUWyc2xkdQBneG8MRpYAQDLku/nx8KT0t5FsGV5juibM4UCGu\nhn33tV9rMKfFuOsckxoCcnpK1A==\n-----END PRIVATE KEY-----\n",
+  "client_email": "asharbhutta@motivational-audios-by-muniba.iam.gserviceaccount.com",
+  "client_id": "115188473009223756335",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/asharbhutta%40motivational-audios-by-muniba.iam.gserviceaccount.com"
+}
