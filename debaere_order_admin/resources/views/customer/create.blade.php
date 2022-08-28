@@ -6,7 +6,7 @@
                 <h2 class="mb-4">Create Customer</h2>
                 <hr>
                  <div class="row">
-                    <x-customer-form :data="$data" />
+                    <x-customer-form :data="$data"  />
                 </div>
             </div>
         </div>

@@ -24,8 +24,8 @@
         <x-post-stats-badges :member="$member" />
     </td>
     <td>
-        <x-post-edit-btn text="" :member="$member" />
-        <x-post-update-btn text="" :member="$member" />
+        <x-customer-edit-btn text="" :member="$member" />
+        <x-customer-delete-btn text="" :member="$member" />
 
     </td>
 </tr>

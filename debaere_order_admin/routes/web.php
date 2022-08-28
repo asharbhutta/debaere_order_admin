@@ -42,8 +42,13 @@ Route::group(
             // Route::get('posts/{id}', [ContentController::class, 'show'])->name('show');
             Route::get('customer/create', [CustomerController::class, 'create'])->name('customer_create');
             Route::post('customer/store', [CustomerController::class, 'store'])->name('customerstore');
+            Route::get('customer/{id}/edit', [CustomerController::class, 'edit'])->name('_customeredit');
+            Route::post('customer/{id}/edit', [CustomerController::class, 'edit'])->name('_customeredit');
+            Route::get('customer/admin', [CustomerController::class, 'admin'])->name('_customer_admin');
+            Route::post('customer/{id}/delete', [CustomerController::class, 'delete'])->name('_customerdelete');
 
-            //  Route::get('customer/{id}/edit', [CustomerController::class, 'edit'])->name('edit');
+
+
             //  Route::get('customer/{id}', [CustomerController::class, 'show'])->name('show');
             //  Route::post('customer/{id}/store', [CustomerController::class, 'store'])->name('store');
             //  Route::post('customer/{id}/update', [CustomerController::class, 'store'])->name('store');

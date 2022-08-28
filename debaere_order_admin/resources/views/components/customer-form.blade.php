@@ -3,6 +3,9 @@
     <?php 
         $customer=$data["model"];
         $user=$data["user"];
+        $formRoute=$data["formRoute"];
+        $routeObject=$data["routeObject"];
+        
     ?>
 
     @if ($errors->any())
@@ -15,7 +18,7 @@
     </div>  
     @endif
  
-    <form method="POST" action="{{ route('admincustomerstore') }}">
+    <form method="POST" action="{{ $routeObject }}">
         @csrf
         <div class="bg-light rounded h-100 p-4">
             <div class="row">
@@ -27,7 +30,6 @@
                         <input type="text" class="form-control" value="{{ $customer->company_name }}" id="company_name" name="company_name" required="required" >
                         <label class="ml-2" for="title">Company Name</label>
                 </div>
-               
             </div>
             
              <div class="row">
@@ -97,13 +99,13 @@
             <div class="row">
                 <div class="col-sm-10 ml-3 mt-3">
                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="location" id="LondonDist" value="1" checked="">
+                        <input class="form-check-input" type="radio" name="location" id="LondonDist" value="1" {{ $customer->location == 1 ? "checked" : "" }}>
                         <label class="form-check-label" for="LondonDist">
                             London Distribution
                         </label>
                     </div>
                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="location" id="surreyDist" value="2" >
+                        <input class="form-check-input" type="radio" name="location" id="surreyDist" value="2" {{ $customer->location == 2 ? "checked" : "" }} >
                         <label class="form-check-label" for="LondonDist">
                             Surrey Distribution
                         </label>
@@ -114,13 +116,13 @@
             <div class="row">
                 <div class="col-sm-10 ml-3 mt-3">
                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="status" id="LondonDist" value="1" checked="">
+                        <input class="form-check-input" type="radio" name="status" id="LondonDist" value="1" {{ $customer->status == 1 ? "checked" : "" }}>
                         <label class="form-check-label" for="LondonDist">
                             Active
                         </label>
                     </div>
                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="status" id="surreyDist" value="0" >
+                        <input class="form-check-input" type="radio" name="status" id="surreyDist" value="0" {{ $customer->location == 0 ? "checked" : "" }} >
                         <label class="form-check-label" for="LondonDist">
                             Inactive
                         </label>

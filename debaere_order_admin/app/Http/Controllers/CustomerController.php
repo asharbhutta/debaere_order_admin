@@ -7,6 +7,8 @@ use Illuminate\Http\Response;
 use App\Models\Customer;
 use App\Models\User;
 use Session;
+use Redirect;
+ use Illuminate\Validation\Rule; //import Rule class 
 
 
 class CustomerController extends Controller
@@ -16,6 +18,13 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function admin(Request $request)
+    {
+        $data=Customer::searchContent($request);
+        return view('customer.admin')->with("data",$data)->with("title","All Customers");
+    }
+
     public function index()
     {
         //
@@ -30,10 +39,14 @@ class CustomerController extends Controller
     {
         
         $customer =new Customer;
+        $customer->location=1;
+        $customer->status=1;
         $user = new User;
         $data=[];
         $data["model"]=$customer;
         $data["user"]=$user;
+        $data["formRoute"]='admincustomerstore';
+        $data["routeObject"]=route('admincustomerstore');
         return view('customer.create')->with("data", $data)->with("title", "Create Customer");  
 
     }
@@ -75,13 +88,7 @@ class CustomerController extends Controller
         $customer->create($validatedData);
         Session::flash('success', 'Customer is created Successfully'); 
 
-
-        return  redirect('/admin/customer/create')->withFlash('success',"Customer Created Successfully");        
-
-
-
-
-
+        return  redirect('/admin/customer/admin')->withFlash('success',"Customer Created Successfully");        
         //
     }
 
@@ -102,9 +109,45 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id,Request $request)
     {
-        //
+        $customer =Customer::findOrFail($id);
+        $data=[];
+        $data["model"]=$customer;
+        $data["user"]=$customer->user;
+        $data["formRoute"]='admin_customeredit';
+        $data["routeObject"]=route('admin_customeredit',$customer->id);
+
+        if($request->isMethod("post"))
+        {
+        
+            $validatedData = $request->validate([
+                "name" => "required|min:5|max:255",
+                "company_name" => "required|min:5|max:255",
+                "contact_number" => "required|numeric",
+                "contact_person" => "required|min:5|max:255",
+                "address_1" => "max:255",
+                "address_2" => "max:255",
+                "address_3" => "max:255",
+                "address_4" => "required|min:5|max:255",
+                "d_address_1" => "max:255",
+                "d_address_2" => "max:255",
+                "d_address_3" => "max:255",
+                "d_address_4" => "max:255",
+                "location" => "required",
+                "status" => "required",
+                'email' => Rule::unique('users')->ignore($customer->user_id),
+                "password" => "required" 
+            ]);
+
+            $customer->user->update($validatedData);
+            $customer->update($validatedData);
+            Session::flash('success', 'Customer is updated Successfully'); 
+            return  redirect('/admin/customer/admin');        
+        }
+
+
+        return view('customer.update')->with("data", $data)->with("title", "Update Customer");  
     }
 
     /**
@@ -128,5 +171,13 @@ class CustomerController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function delete($id)
+    {
+        $model=Customer::findOrFail($id);
+        Session::flash('success', 'Customer is Deleted Successfully'); 
+        $model->delete();
+        return  redirect('/admin/customer/admin');        
     }
 }
