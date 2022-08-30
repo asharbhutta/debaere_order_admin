@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\OfferingController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -40,12 +42,22 @@ Route::group(
             // Route::get('posts/{id}/edit', [ContentController::class, 'edit'])->name('edit');
             // Route::post('posts/{id}/store', [ContentController::class, 'store'])->name('store');
             // Route::get('posts/{id}', [ContentController::class, 'show'])->name('show');
-            Route::get('customer/create', [CustomerController::class, 'create'])->name('customer_create');
+            Route::get('customer/create', [CustomerController::class, 'create'])->name('_customer_create');
             Route::post('customer/store', [CustomerController::class, 'store'])->name('customerstore');
             Route::get('customer/{id}/edit', [CustomerController::class, 'edit'])->name('_customeredit');
             Route::post('customer/{id}/edit', [CustomerController::class, 'edit'])->name('_customeredit');
             Route::get('customer/admin', [CustomerController::class, 'admin'])->name('_customer_admin');
             Route::post('customer/{id}/delete', [CustomerController::class, 'delete'])->name('_customerdelete');
+
+            Route::get('offering/create', [OfferingController::class, 'create'])->name('_offering_create');
+            Route::post('offering/create', [OfferingController::class, 'create'])->name('_offering_create');
+
+            Route::get('offering/{id}/edit', [OfferingController::class, 'edit'])->name('_offering_edit');
+            Route::post('offering/{id}/edit', [OfferingController::class, 'edit'])->name('_offering_edit');
+             Route::get('offering/admin', [OfferingController::class, 'admin'])->name('_offering_admin');
+
+
+
 
 
 

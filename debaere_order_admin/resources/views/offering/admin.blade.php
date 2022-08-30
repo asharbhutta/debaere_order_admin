@@ -5,10 +5,10 @@
             <div class="bg-light rounded h-100 p-4">
                 <div class="row">
                     <div class="col-md-3">
-                        <h2 class="mb-4">All Customers</h2>
+                        <h2 class="mb-4">All Offerings</h2>
                     </div>
                     <div class="col-md-2 offset-md-7">
-                        <a class="btn btn-outline-primary" href="{{ route('admin_customer_create') }}" >Create Customer</a>
+                        <a class="btn btn-outline-primary" href="{{ route('admin_offering_create') }}" >Create Offerings</a>
                     </div>
                 </div>
                 <hr>
@@ -18,12 +18,10 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Company Name</th>
-                                    <th scope="col">Contact Number</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Location</th>
+                                    <th scope="col">Picture</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Sliced</th>
                                     <th scope="col">Status</th>
-                                    <th scope="col">Actions</th>
                                 </tr>
                                  <tr>
                                     <x-customer-search-form />
@@ -31,12 +29,13 @@
                             </thead>
                             <tbody>
                                 @foreach($data as $k=>$member)
-                                <x-customer-admin-table-row :member="$member" />
+                                <x-offering-table-row :member="$member" />
                                 @endforeach
                             </tbody>
                         </table>
-                        {{ $data->appends(request()->query())->links() }}
                     </div>
+                     {{ $data->appends(request()->query())->links() }}
+
                 </div>
             </div>
         </div>
