@@ -81,7 +81,7 @@
             </div>
             <hr>
              <div class="row">
-                <div class="col-md-5 m-2">
+                <div class="text-center">
                     <a href="{{ $offering->getIconUrl() }}" data-lightbox="photos">
                         <img style="width:150px;" class="img-fluid" src="{{ $offering->getIconUrl() }}">
                     </a>

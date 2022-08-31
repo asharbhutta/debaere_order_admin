@@ -3,28 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use App\Models\Offering;
-use App\Models\User;
+use App\Models\Product;
+use Illuminate\Http\Response;
 use Session;
 use Redirect;
 use Illuminate\Validation\Rule; //import Rule class 
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 
-
-class OfferingController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-     public function admin(Request $request)
+    public function index()
     {
-       // dd(Offering::Where('status','=',1)->get());
-        $data=Offering::searchContent($request);
-        return view('offering.admin')->with("data",$data)->with("title","All Offerings");
+        //
     }
 
     /**
@@ -34,22 +31,28 @@ class OfferingController extends Controller
      */
     public function create(Request $request)
     {
-        $model=new Offering();
-        $model->status=1;
-        $model->sliced=0;
-
+        $model=new Product();
+        $offeringArr=Offering::getActiveOfferingArray();
         $data=[];
        
-
          if($request->isMethod("post"))
         {
 
             $validatedData = $request->validate([
                 "name" => "required|min:5|max:255",
-                "slug" => "required|min:5|max:255",
+                "product_number" => "required|min:5|max:255",
                 "description" => "required|min:5",
-                "sliced" => "required",
-                "status" => "required"
+                "offering_id" => "required",
+                "status" => "required",
+                "weight" => "max:25",
+                "price" => "max:25",
+                "size" => "max:25",
+                "portion" => "max:25",
+                "pack_size" => "max:25",
+                "shelf" => "max:25",
+                "storage" => "max:25",
+
+                
             ]);
 
              if($request->hasFile('image'))
@@ -59,18 +62,17 @@ class OfferingController extends Controller
 
             $model->create($validatedData);
 
-            Session::flash('success', 'Offering is created Successfully'); 
-            return  redirect('/admin/offering/admin');        
+            Session::flash('success', 'Product is created Successfully'); 
+            return  redirect('/admin/product/admin');        
         }
 
         $data["model"]=$model;
-        $data["formRoute"]='admin_offering_create';
-        $data["routeObject"]=route('admin_offering_create');
+        $data["offering"]=$offeringArr;
+        $data["formRoute"]='admin_product_create';
+        $data["routeObject"]=route('admin_product_create');
 
 
-        return view('offering.create')->with("data", $data)->with("title", "Create Offering");  
-
-        //
+        return view('product.create')->with("data", $data)->with("title", "Create Product"); 
     }
 
     /**
@@ -101,22 +103,30 @@ class OfferingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id,Request $request)
+   public function edit($id,Request $request)
     {
-         $model=Offering::findOrFail($id);
-       
+        $model=Product::findOrFail($id);
+        $offeringArr=Offering::getActiveOfferingArray();
         $data=[];
        
-
          if($request->isMethod("post"))
         {
 
             $validatedData = $request->validate([
                 "name" => "required|min:5|max:255",
-                "slug" => "required|min:5|max:255",
+                "product_number" => "required|min:5|max:255",
                 "description" => "required|min:5",
-                "sliced" => "required",
-                "status" => "required"
+                "offering_id" => "required",
+                "status" => "required",
+                "weight" => "max:25",
+                "price" => "max:25",
+                "size" => "max:25",
+                "portion" => "max:25",
+                "pack_size" => "max:25",
+                "shelf" => "max:25",
+                "storage" => "max:25",
+
+                
             ]);
 
              if($request->hasFile('image'))
@@ -126,17 +136,17 @@ class OfferingController extends Controller
 
             $model->update($validatedData);
 
-            Session::flash('success', 'Offering is created Updated'); 
-            return  redirect('/admin/offering/admin');        
+            Session::flash('success', 'Product is Updated Successfully'); 
+            return  redirect('/admin/product/admin');        
         }
 
         $data["model"]=$model;
-        $data["formRoute"]='admin_offering_edit';
-        $data["routeObject"]=route('admin_offering_edit',$model->id);
+        $data["offering"]=$offeringArr;
+        $data["formRoute"]='admin_product_create';
+        $data["routeObject"]=route('admin_product_create');
 
 
-        return view('offering.update')->with("data", $data)->with("title", "Update Offering");  
-
+        return view('product.update')->with("data", $data)->with("title", "Create Product"); 
     }
 
     /**

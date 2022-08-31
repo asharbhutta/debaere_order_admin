@@ -2,8 +2,8 @@
 <tr>
     <td>{{$member->index}}</td>
     <td>
-         <a href="{{ $member->getIconUrl() }}" class="m-2 hide" data-lightbox="photos">
-                <img style="width:100px;" class="img-fluid" src="{{ $member->getIconUrl() }}">
+         <a href="{{ $member->getIconUrl() }}" class="m-2" data-lightbox="photos">
+                <img style="width:50px;" class="img-fluid" src="{{ $member->getIconUrl() }}">
         </a>
     </td>
     <td>{{$member->name}}</td>

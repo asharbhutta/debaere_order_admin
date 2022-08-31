@@ -139,7 +139,7 @@
                 </div>
                  <div class="col-md-6">
                     <div class="col-md-12 form-floating mb-3">
-                        <input type="password" class="form-control required" value="{{ $user->password }}" id="password" name="password">
+                        <input type="password" class="form-control required" value="{{ $formRoute=='admin_customeredit' ? '' : $user->password }}" id="password" name="password">
                         <label class="ml-2 required" for="password">Password</label>
                     </div>         
                 </div>

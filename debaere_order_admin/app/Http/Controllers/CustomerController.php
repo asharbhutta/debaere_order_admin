@@ -9,6 +9,7 @@ use App\Models\User;
 use Session;
 use Redirect;
  use Illuminate\Validation\Rule; //import Rule class 
+ use Illuminate\Support\Facades\Hash;
 
 
 class CustomerController extends Controller
@@ -21,6 +22,8 @@ class CustomerController extends Controller
 
      public function admin(Request $request)
     {
+        //echo strpos(request()->route()->getName(),'customer')!==false ? "true":"false";
+
         $data=Customer::searchContent($request);
         return view('customer.admin')->with("data",$data)->with("title","All Customers");
     }
@@ -82,9 +85,12 @@ class CustomerController extends Controller
         $user=new User;
         $customer=new Customer;
         $user->type=2;
+        $validatedData["password"]=Hash::make($validatedData["password"]);
+        $validatedData["type"]=2;
         $user->name=$validatedData["name"];
         $userObj=$user->create($validatedData);
         $validatedData["user_id"]=$userObj->id;
+
         $customer->create($validatedData);
         Session::flash('success', 'Customer is created Successfully'); 
 
@@ -136,9 +142,19 @@ class CustomerController extends Controller
                 "d_address_4" => "max:255",
                 "location" => "required",
                 "status" => "required",
+                "password"=>"max:20",
                 'email' => Rule::unique('users')->ignore($customer->user_id),
-                "password" => "required" 
             ]);
+
+            $validatedData["type"]=2;
+
+
+            if(isset($validatedData["password"]) && !Hash::check($validatedData["password"], $customer->user->password))
+            {
+                if(!empty($validatedData["password"]))
+                $validatedData["password"]=Hash::make($validatedData["password"]);
+
+            }
 
             $customer->user->update($validatedData);
             $customer->update($validatedData);

@@ -57,18 +57,17 @@ class Customer extends Model
         if ($request->filled('location')) {
             $data->Where('location', '=', $request->input('location'));
         }
-         if ($request->filled('contact_number')) {
+        if ($request->filled('contact_number')) {
             $data->Where('contact_number', 'like', "%" . $request->input('contact_number') . "%");
         }
         if ($request->filled('status')) {
             $data->Where('status', '=', $request->input('status'));
         }
-         if ($request->filled('email')) {
+        if ($request->filled('email')) {
             $data->Where('users.email', 'like', "%" . $request->input('email') . "%");
         }
         $data->orderBy('users.created_at', 'desc');
         
-        //$data->paginate(20);
         return $data->paginate(20);
     }
 }

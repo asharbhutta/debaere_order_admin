@@ -24,7 +24,7 @@
                                     <th scope="col">Status</th>
                                 </tr>
                                  <tr>
-                                    <x-customer-search-form />
+                                    <x-offering-search-form />
                                 </tr>
                             </thead>
                             <tbody>

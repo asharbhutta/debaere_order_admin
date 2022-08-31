@@ -2,16 +2,13 @@
      <td>
      </td>
      <td>
-         <input name="company_name" type="text" value="{{ Request::get('company_name') }}" class="form-control">
      </td>
      <td>
-        <input name="contact_number" type="text" value="{{ Request::get('contact_number') }}" class="form-control">
+         <input name="name" type="text" value="{{ Request::get('name') }}" class="form-control">
      </td>
+     
      <td>
-        <input name="email" type="text" value="{{ Request::get('email') }}" class="form-control">
-     </td>
-     <td>
-         <x-location-dropdown name="location" />
+         <x-sliced-dropdown name="sliced" />
      </td>
      <td>
          <x-status-dropdown name="status" />

@@ -39,13 +39,13 @@ class Offering extends Model
     {
         
         
-        $data = new Offering();
+        $data =Offering::Where('name','<>',null);
 
         if ($request->filled('name')) {
             $data->Where('name', 'like', "%" . $request->input('name') . "%");
         }
         if ($request->filled('sliced')) {
-            $data->Where('sliced', '=', $request->input('location'));
+            $data->Where('sliced', '=', $request->input('sliced'));
         }
         if ($request->filled('status')) {
             $data->Where('status', '=', $request->input('status'));
@@ -54,5 +54,17 @@ class Offering extends Model
         $data->orderBy('created_at', 'desc');
         
         return $data->paginate(20);
+    }
+
+    public static function getActiveOfferingArray()
+    {
+        $arr=[];
+        $offerings=self::Where('status','=',1)->get();
+        foreach($offerings as $offr)
+        {
+            $arr[$offr->id]=$offr->name;
+        }
+
+        return $arr;
     }
 }
