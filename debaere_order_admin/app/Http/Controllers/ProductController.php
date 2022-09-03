@@ -14,6 +14,13 @@ use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class ProductController extends Controller
 {
+
+    public function admin(Request $request)
+    {
+       // dd(Offering::Where('status','=',1)->get());
+        $data=Product::searchContent($request);
+        return view('product.admin')->with("data",$data)->with("title","All Products");
+    }
     /**
      * Display a listing of the resource.
      *

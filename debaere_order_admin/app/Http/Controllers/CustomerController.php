@@ -22,6 +22,9 @@ class CustomerController extends Controller
 
      public function admin(Request $request)
     {
+        // $num = 233;
+        // echo sprintf("%'.06d\n", $num);
+        // exit;
         //echo strpos(request()->route()->getName(),'customer')!==false ? "true":"false";
 
         $data=Customer::searchContent($request);
@@ -154,6 +157,10 @@ class CustomerController extends Controller
                 if(!empty($validatedData["password"]))
                 $validatedData["password"]=Hash::make($validatedData["password"]);
 
+            }
+            else
+            {
+                 $validatedData["password"]=$customer->user->password;
             }
 
             $customer->user->update($validatedData);

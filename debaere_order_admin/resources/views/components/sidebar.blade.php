@@ -19,6 +19,8 @@
             <a href="" class="nav-item nav-link  {{ request()->route()->prefix('/admin')=='/admin' ? "active" : " " }}"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
             <a href="{{ route('admin_customer_admin') }}" class="nav-item nav-link  {{  strpos(request()->route()->getName(),'customer')!== false ? 'active' : ' ' }}"><i class="fa fa-user-alt me-2"></i>Customers</a>
             <a href="{{ route('admin_offering_admin') }}" class="nav-item nav-link  {{  strpos(request()->route()->getName(),'offering')!== false ? 'active' : ' ' }}"><i class="fa fa-cookie m-2"></i>Offerings</a>
+             <a href="{{ route('admin_product_admin') }}" class="nav-item nav-link  {{  strpos(request()->route()->getName(),'product')!== false ? 'active' : ' ' }}"><i class="fa fa-bread-slice m-2"></i>Products</a>
+
         </div>
     </nav>
 </div>

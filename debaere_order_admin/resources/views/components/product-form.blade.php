@@ -4,8 +4,7 @@
         $product=$data["model"];
         $offerings=$data["offering"];
         $formRoute=$data["formRoute"];
-        $routeObject=$data["routeObject"];
-        
+        $routeObject=$data["routeObject"];        
     ?>
 
     @if ($errors->any())
@@ -34,7 +33,7 @@
                         <select class="form-control select2"  name="offering_id">
                             <option value="" >Select Offering</option>
                             @foreach($offerings as $k=>$v)
-                                <option selected="{{ $k==$product->offering_id ? 'selected':'' }}"  value="{{ $k }}">{{ $v }}</option>
+                                <option <?= $k== $product->offering_id ? "selected" : "" ?>  value="{{ $k }}">{{ $v }}</option>
                             @endforeach
                         </select>
                 </div>
@@ -101,9 +100,6 @@
                         </label>
                     </div>
                 </div>
-
-                 
-
             </div>
             <hr>
             <div class="row">
@@ -112,6 +108,16 @@
                     </div>
             </div>
             <hr>
+
+            <div class="row">
+                <div class="text-center">
+                    <a href="{{ $product->getImageUrl() }}" data-lightbox="photos">
+                        <img style="width:500px;" class="img-fluid" src="{{ $product->getImageUrl() }}">
+                    </a>
+                </div>
+            </div>
+            <hr>
+
             
 
             <div class="row mt-2">

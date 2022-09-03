@@ -49,6 +49,8 @@ Route::group(
             Route::post('product/create', [ProductController::class, 'create'])->name('_product_create');
             Route::get('product/{id}/edit', [ProductController::class, 'edit'])->name('_product_edit');
             Route::post('product/{id}/edit', [ProductController::class, 'edit'])->name('_product_edit');
+            Route::get('product/admin', [ProductController::class, 'admin'])->name('_product_admin');
+
 
 
         });

@@ -59,10 +59,26 @@ class Offering extends Model
     public static function getActiveOfferingArray()
     {
         $arr=[];
-        $offerings=self::Where('status','=',1)->get();
+        $offerings=self::Where('status','<>',null)->get();
         foreach($offerings as $offr)
         {
             $arr[$offr->id]=$offr->name;
+        }
+
+        return $arr;
+    }
+
+    public static function getActiveOfferings()
+    {
+        $arr=[];
+        $offerings=Offering::Where('status','=',1)->get();
+        foreach($offerings as $offering)
+        {
+            $arr[]=["id"=>$offering->id,
+            "name"=>$offering->name,
+            'image_url'=>$offering->getIconUrl(),
+            'sliced'=>$offering->sliced
+            ];
         }
 
         return $arr;
