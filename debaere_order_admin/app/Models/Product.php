@@ -84,7 +84,7 @@ class Product extends Model
             'image_url'=>$product->getImageUrl(),
             'sliced'=>$product->offering->sliced,
             'offering_id'=>$product->offering_id,
-            'product_number'=>$product->number,
+            'product_number'=>$product->product_number,
             'description'=>$product->description,
             'weight'=>$product->weight,
             'size'=>$product->size,

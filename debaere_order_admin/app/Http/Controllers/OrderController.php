@@ -55,6 +55,8 @@ class OrderController extends Controller
                 $orderProduct->order_id = $order->id;
                 $orderProduct->product_id=$op["product_id"];
                 $orderProduct->sliced=$op["sliced"];
+                $orderProduct->count=$op["count"];
+
                 $orderProduct->save();
             }
 
