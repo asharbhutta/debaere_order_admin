@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Offering;
+use App\Models\Product;
 
 class AuthController extends Controller
 {
@@ -52,6 +54,8 @@ class AuthController extends Controller
                 'status' => 'success',
                 'user' => $user,
                 'customer'=>$user->customer,
+                'offerings'=>Offering::getActiveOfferings(),
+                'products'=>Product::getActiveProducts(),
                 'authorisation' => [
                     'token' => $token,
                     'type' => 'bearer',

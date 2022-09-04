@@ -73,6 +73,10 @@ class Product extends Model
         $products=Product::Where('status','=',1)->get();
         foreach($products as $product)
         {
+            $sliceOption=false;
+            if($product->offering->sliced)
+            $sliceOption=true;
+
             $arr[]=[
             "id"=>$product->id,
             "name"=>$product->name,
@@ -86,7 +90,8 @@ class Product extends Model
             'size'=>$product->size,
             'pack_size'=>$product->pack_size,
             'shelf'=>$product->shelf,
-            'storage'=>$product->storage
+            'storage'=>$product->storage,
+            'sliceOption'=>$sliceOption
             ];
         }
 
