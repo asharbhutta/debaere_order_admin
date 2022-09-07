@@ -10,6 +10,9 @@ use Session;
 use Redirect;
 use Illuminate\Validation\Rule; //import Rule class 
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use App\Models\ProductImages;
+
+
 
 
 class ProductController extends Controller
@@ -51,23 +54,27 @@ class ProductController extends Controller
                 "description" => "required|min:5",
                 "offering_id" => "required",
                 "status" => "required",
-                "weight" => "max:25",
-                "price" => "max:25",
-                "size" => "max:25",
-                "portion" => "max:25",
-                "pack_size" => "max:25",
-                "shelf" => "max:25",
-                "storage" => "max:25",
+                "weight" => "max:125",
+                "price" => "max:125",
+                "size" => "max:125",
+                "portion" => "max:125",
+                "pack_size" => "max:125",
+                "shelf" => "max:155",
+                "storage" => "max:125",
 
                 
             ]);
 
-             if($request->hasFile('image'))
-            {   
-                 $validatedData["icon"] = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
+            $validatedData["description"]=strip_tags($validatedData["description"]);
+            $model=$model->create($validatedData);
+
+            if($request->hasFile('image'))
+            {   $pImage = new ProductImages();
+                $pImage->path = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
+                $pImage->product_id=$model->id;
+                $pImage->save();
             }
 
-            $model->create($validatedData);
 
             Session::flash('success', 'Product is created Successfully'); 
             return  redirect('/admin/product/admin');        
@@ -136,12 +143,20 @@ class ProductController extends Controller
                 
             ]);
 
-             if($request->hasFile('image'))
-            {   
-                 $validatedData["icon"] = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
+            $validatedData["description"]=strip_tags($validatedData["description"]);
+
+
+
+           
+
+            $model=$model->update($validatedData);
+            if($request->hasFile('image'))
+            {   $pImage = new ProductImages();
+                $pImage->path = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
+                $pImage->product_id=$model->id;
+                $pImage->save();
             }
 
-            $model->update($validatedData);
 
             Session::flash('success', 'Product is Updated Successfully'); 
             return  redirect('/admin/product/admin');        
