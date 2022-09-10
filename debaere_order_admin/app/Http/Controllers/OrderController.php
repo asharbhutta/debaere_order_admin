@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Offering;
 use App\Models\Order;
 use App\Models\OrderProduct;
+use App\Mail\OrderEmail;
 
 
 
@@ -59,6 +60,8 @@ class OrderController extends Controller
 
                 $orderProduct->save();
             }
+
+            $this->sendOrderEmail($order);
 
             return response()->json([
                 'status' => 'success',
@@ -112,6 +115,14 @@ class OrderController extends Controller
         ]);
 
 
+    }
+
+    public function sendOrderEmail($order)
+    {
+        $orderEmails=[];
+        $orderEmails[]="asharbhutta@gmail.com";
+        $orderEmails[]=$order->customer->user->email;
+        \Mail::to($orderEmails)->send(new OrderEmail($order));
     }
    
 }

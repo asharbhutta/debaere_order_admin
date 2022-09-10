@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OfferingController;
 use App\Http\Controllers\ProductController;
+use App\Models\Order;
+
+
 
 
 
@@ -20,6 +23,20 @@ use App\Http\Controllers\ProductController;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('mailview', function () {
+   $order=Order::findOrFail(23);
+    return view('emails.ordermail',['order'=>$order]);
+
+});
+
+Route::get('send-mail', function () {
+   
+      $order=Order::findOrFail(23);
+    \Mail::to(['asharbhutta@gmail.com','pg@cc.com'])->send(new \App\Mail\OrderEmail($order));
+   
+    dd("Email is Sent.");
 });
 
 Auth::routes();

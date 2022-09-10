@@ -24,4 +24,17 @@ class OrderProduct extends Model
     {
         return $this->belongsTo(Product::class, 'product_id');
     }
+
+    public function extraOption()
+    {
+        $option="N/A";
+        if($this->product->offering->sliced)
+        {
+            if($this->product->sliced)
+            $option="Sliced";
+            else
+            $option="Unsliced";
+        }
+        return $option;
+    }
 }
