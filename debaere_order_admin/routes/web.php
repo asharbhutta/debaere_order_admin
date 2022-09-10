@@ -5,6 +5,8 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\OfferingController;
 use App\Http\Controllers\ProductController;
 use App\Models\Order;
+use App\Http\Controllers\OrdersController;
+
 
 
 
@@ -67,6 +69,13 @@ Route::group(
             Route::get('product/{id}/edit', [ProductController::class, 'edit'])->name('_product_edit');
             Route::post('product/{id}/edit', [ProductController::class, 'edit'])->name('_product_edit');
             Route::get('product/admin', [ProductController::class, 'admin'])->name('_product_admin');
+
+            Route::get('orders/admin', [OrdersController::class, 'admin'])->name('_order_admin');
+            Route::get('orders//{id}/view', [OrdersController::class, 'view'])->name('_order_view');
+
+
+
+
 
 
 

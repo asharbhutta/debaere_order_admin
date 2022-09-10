@@ -13,6 +13,28 @@ class Order extends Model
 {
     use HasFactory;
 
+
+     public static function searchContent($request)
+    {
+        
+        
+        $data =self::Where('order_no','<>',null);
+
+        if ($request->filled('order_no')) {
+            $data->Where('order_no', 'like', "%" . $request->input('order_no') . "%");
+        }
+        if ($request->filled('customer_name')) {
+            $data->Where('customer_name', 'like', "%" . $request->input('customer_name') . "%");
+        }
+        if ($request->filled('date')) {
+            $data->Where('date', '=', $request->input('date'));
+        }
+       
+        $data->orderBy('created_at', 'desc');
+        
+        return $data->paginate(20);
+    }
+
     // public static function boot()
     // {
     //     parent::boot();
