@@ -61,52 +61,54 @@ tr:nth-child(even) {
     </div>
 
     <table style="width:100%;">
-        <tr>
+      <tbody>
+          <tr>
             <td style="width:50%;   text-align:left;" >
                  <h4 style="margin:15px;" >SUPPLIER</h4>
                 <div style="margin-left:15px;">
                     <b>De Baere Limited</b>
-                    <p>Unit 4,SEGRO Park</p>
-                    <p>Horsenden Lane South</p>
-                    <p>Greenford</p>
-                    <p>UB6 7RL</p>
-                    <p>Phone: 020 8998 1026</p>
-                    <p>Email: orders@debaere.co.uk</p>
+                    <p>Unit 4,SEGRO Park<br>
+                    Horsenden Lane South<br>
+                    Greenford<br>
+                    UB6 7RL<br>
+                    Phone: 020 8998 1026<br>
+                    Email: orders@debaere.co.uk</p>
                 </div>
             </td>
             <td>
                 <div style="width:50%; text-align:left;">
                     <div style="margin-left:15px;">
                         <b>PURCHASE ORDER</b>
-                        <p>PO# {{$order->order_no}}</p>
-                        <p>Failure to quote this number may cause delay in payment.</p>
+                        <p>PO# {{$order->order_no}}<br>
+                        Failure to quote this number may cause delay in payment.</p>
                     </div>
                 </div>
             </td>
         </tr>
+      </tbody>
     </table>
 
 
     <table style="width:100%;">
         <tr>
             <td style="width:50%;   text-align:left;">
-                 <h4 style="margin:5px;" >INVOICE TO</h4>
+                 <h4 style="margin-left:5px;" >INVOICE TO</h4>
                 <div style="margin-left:15px;">
-                    <p>{{ $order->customer->company_name }}</p>
-                    <p>{{ $order->customer->address_1 }}</p>
-                    <p>{{ $order->customer->address_2 }}</p>
-                    <p>{{ $order->customer->address_3 }}</p>
-                    <p>{{ $order->customer->address_4 }}</p>
+                    <p>{{ $order->customer->company_name }}<br>
+                    {{ $order->customer->address_1 }}<br>
+                    {{ $order->customer->address_2 }}<br>
+                    {{ $order->customer->address_3 }}<br>
+                    {{ $order->customer->address_4 }}</p>
                 </div>
             </td>
             <td style="width:50%;   text-align:left;">
-                <h4 style="margin:5px;" >DELIVERY ADDRESS</h4>
+                <h4 style="margin-left:5px;" >DELIVERY ADDRESS</h4>
                 <div style="margin-left:15px;">
-                    <p>{{ $order->customer->company_name }}</p>
-                    <p>{{ $order->customer->d_address_1 }}</p>
-                    <p>{{ $order->customer->d_address_2 }}</p>
-                    <p>{{ $order->customer->d_address_3 }}</p>
-                    <p>{{ $order->customer->d_address_4 }}</p>
+                     <p>{{ $order->customer->company_name }}<br>
+                    {{ $order->customer->d_address_1 }}<br>
+                    {{ $order->customer->d_address_2 }}<br>
+                    {{ $order->customer->d_address_3 }}<br>
+                    {{ $order->customer->d_address_4 }}</p>
                 </div>
             </td>
         </tr>
