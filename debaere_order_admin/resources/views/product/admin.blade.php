@@ -21,6 +21,7 @@
                                     <th scope="col">Name</th>
                                     <th scope="col">Product Number</th>
                                     <th scope="col">Offering </th>
+                                    <th scope="col">Sliced/Unsliced</th>
                                     <th scope="col">Status</th>
                                 </tr>
                                  <tr>

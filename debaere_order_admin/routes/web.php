@@ -27,11 +27,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('mailview', function () {
-   $order=Order::findOrFail(23);
+Route::get('mailview/{id}', function ($id) {
+   $order=Order::findOrFail($id);
     return view('emails.ordermail',['order'=>$order]);
 
-});
+})->name("mailview");
 
 Route::get('send-mail', function () {
    
@@ -72,6 +72,8 @@ Route::group(
 
             Route::get('orders/admin', [OrdersController::class, 'admin'])->name('_order_admin');
             Route::get('orders//{id}/view', [OrdersController::class, 'view'])->name('_order_view');
+            Route::get('product/{id}/replicate', [ProductController::class, 'replicate'])->name('_product_replicate');
+
 
 
 

@@ -48,22 +48,22 @@ class ProductController extends Controller
          if($request->isMethod("post"))
         {
 
-            $validatedData = $request->validate([
-                "name" => "required|min:5|max:255",
-                "product_number" => "required|min:5|max:255",
+           $validatedData = $request->validate([
+                "name" => "required|min:3|max:255",
+                "product_number" => "required|min:3|max:255",
                 "description" => "required|min:5",
                 "offering_id" => "required",
                 "status" => "required",
-                "weight" => "max:125",
-                "price" => "max:125",
-                "size" => "max:125",
-                "portion" => "max:125",
-                "pack_size" => "max:125",
-                "shelf" => "max:155",
-                "storage" => "max:125",
-
-                
+                "weight" => "max:25",
+                "price" => "max:25",
+                "size" => "max:25",
+                "portions" => "max:25",
+                "pack_size" => "max:25",
+                "shelf" => "max:55",
+                "storage" => "max:555",
+                "sliced"=>"max:20"
             ]);
+
 
             $validatedData["description"]=strip_tags($validatedData["description"]);
             $model=$model->create($validatedData);
@@ -106,9 +106,18 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function replicate($id)
     {
-        //
+        $model=Product::findOrFail($id);
+        $replicatedModel=$model->replicate();
+        $productImage=$model->productImage->replicate();
+        $replicatedModel->save();
+        $productImage->product_id=$replicatedModel->id;
+        $productImage->save();
+        
+        Session::flash('success', 'Product Replicated Successfully'); 
+        return  redirect('/admin/product/admin');    
+
     }
 
     /**
@@ -127,20 +136,19 @@ class ProductController extends Controller
         {
 
             $validatedData = $request->validate([
-                "name" => "required|min:5|max:255",
-                "product_number" => "required|min:5|max:255",
+                "name" => "required|min:3|max:255",
+                "product_number" => "required|min:3|max:255",
                 "description" => "required|min:5",
                 "offering_id" => "required",
                 "status" => "required",
                 "weight" => "max:25",
                 "price" => "max:25",
                 "size" => "max:25",
-                "portion" => "max:25",
+                "portions" => "max:25",
                 "pack_size" => "max:25",
-                "shelf" => "max:25",
-                "storage" => "max:25",
-
-                
+                "shelf" => "max:55",
+                "storage" => "max:555",
+                "sliced"=>"max:20"
             ]);
 
             $validatedData["description"]=strip_tags($validatedData["description"]);
@@ -164,8 +172,8 @@ class ProductController extends Controller
 
         $data["model"]=$model;
         $data["offering"]=$offeringArr;
-        $data["formRoute"]='admin_product_create';
-        $data["routeObject"]=route('admin_product_create');
+        $data["formRoute"]='admin_product_edit';
+        $data["routeObject"]=route('admin_product_edit',$id);
 
 
         return view('product.update')->with("data", $data)->with("title", "Create Product"); 

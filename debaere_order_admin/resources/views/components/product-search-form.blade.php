@@ -7,9 +7,11 @@
      <td>
          <input name="product_number" type="text" value="{{ Request::get('product_number') }}" class="form-control">
      </td>
-     
      <td>
          <x-offering-dropdown />
+     </td>
+      <td>
+         <x-product-sliced-dropdown  name="sliced" />
      </td>
      <td>
          <x-status-dropdown name="status" />

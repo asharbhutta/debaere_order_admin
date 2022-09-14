@@ -100,6 +100,22 @@
                         </label>
                     </div>
                 </div>
+
+                 <div class="col-sm-5 ml-3 mt-3">
+                     <div class="form-check">
+                        <input class="form-check-input" type="radio" name="sliced" id="sliced" value="yes" {{ $product->sliced == "yes" ? "checked" : "" }}>
+                        <label class="form-check-label" for="LondonDist">
+                            Sliced
+                        </label>
+                    </div>
+                     <div class="form-check">
+                        <input class="form-check-input" type="radio" name="sliced" id="surreyDist" value="no" {{ $product->sliced == "no" ? "checked" : "" }} >
+                        <label class="form-check-label" for="LondonDist">
+                            Unsliced
+                        </label>
+                    </div>
+                </div>
+
             </div>
             <hr>
             <div class="row">

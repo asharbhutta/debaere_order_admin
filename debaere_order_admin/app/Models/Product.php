@@ -61,6 +61,9 @@ class Product extends Model
         if ($request->filled('status')) {
             $data->Where('status', '=', $request->input('status'));
         }
+         if ($request->filled('sliced')) {
+            $data->Where('sliced', 'like', "%" . $request->input('sliced') . "%");
+        }
     
         $data->orderBy('created_at', 'desc');
         
@@ -72,23 +75,36 @@ class Product extends Model
         $arr=[];
         $products=Product::Where('status','=',1)->get();
         foreach($products as $product)
-        {
+        {   
+            $sliced=0;
             $sliceOption=false;
-            if($product->offering->sliced)
-            $sliceOption=true;
+            if($product->sliced=="yes")
+            {
+                $sliceOption=true;
+                $sliced=1;
+            }
+
+            $pack_size=1;
+
+            $packSizeArr=explode(" ",$product->pack_size);
+            
+            if(isset($packSizeArr[count($packSizeArr)-1]))
+            $pack_size=$packSizeArr[count($packSizeArr)-1];
+
 
             $arr[]=[
             "id"=>$product->id,
             "name"=>$product->name,
             "offering_name"=>$product->offering->name,
             'image_url'=>$product->getImageUrl(),
-            'sliced'=>$product->offering->sliced,
+            'sliced'=>$sliced,
             'offering_id'=>$product->offering_id,
             'product_number'=>$product->product_number,
             'description'=>$product->description,
             'weight'=>$product->weight,
             'size'=>$product->size,
-            'pack_size'=>$product->pack_size,
+            'portions'=>$product->portions,
+            'pack_size'=>$pack_size,
             'shelf'=>$product->shelf,
             'storage'=>$product->storage,
             'sliceOption'=>$sliceOption
