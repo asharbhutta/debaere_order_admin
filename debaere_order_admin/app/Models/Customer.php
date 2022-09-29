@@ -24,7 +24,8 @@ class Customer extends Model
             "d_address_4" ,
             "location",
             "status",
-            'user_id'
+            'user_id',
+            'customer_number'
     ];
     
     protected $with = ['user'];

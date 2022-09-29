@@ -6,6 +6,8 @@ use App\Http\Controllers\OfferingController;
 use App\Http\Controllers\ProductController;
 use App\Models\Order;
 use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\PromotionController;
+
 
 
 
@@ -73,6 +75,11 @@ Route::group(
             Route::get('orders/admin', [OrdersController::class, 'admin'])->name('_order_admin');
             Route::get('orders//{id}/view', [OrdersController::class, 'view'])->name('_order_view');
             Route::get('product/{id}/replicate', [ProductController::class, 'replicate'])->name('_product_replicate');
+
+            Route::post('promotion/index', [PromotionController::class, 'index'])->name('_promotion_index');
+            Route::get('promotion/index', [PromotionController::class, 'index'])->name('_promotion_index');
+
+
 
 
 

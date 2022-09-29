@@ -61,6 +61,9 @@ tr:nth-child(even) {
     </div>
 
      <p style="margin:4px 0px 0px 4px;" ><b>PO# {{$order->order_no}}</b> <?php if(!isset($_GET["print"])){ ?> <a target="blank" href="{{ route('mailview',['id'=>$order->id,'print'=>true]) }}" >Print</a>  <?php } ?> <br>
+     <p style="margin:4px 0px 0px 4px;" ><b>CN# {{$order->customer->customer_number}}</b></p>
+     <p style="margin:4px 0px 0px 4px;" ><b>Location: {{ $order->customer->getLocation() }}</b></p>
+
      <table  style="width:100%;">
       <tbody>
           <tr>
@@ -139,8 +142,8 @@ tr:nth-child(even) {
         <thead>
         <tr>
             <th width="10%" >Product#</th>
-            <th width="50%" >Description</th>
-            <th width="20%" >QTY</th>
+            <th width="60%" >Description</th>
+            <th width="10%" >QTY</th>
             <th width="20%" >Options</th>
         </tr>
         </thead>
@@ -148,7 +151,12 @@ tr:nth-child(even) {
             @foreach($products as $pdct)
             <tr>
                 <td>{{ $pdct->product->product_number }}</td>
-                <td>{{ $pdct->product->name }}</td>
+                <td>{{ $pdct->product->name }}
+                    <?php if(isset($pdct->notes) && !empty($pdct->notes)){ ?>
+                    <br>
+                    <p><i>Message:{{ $pdct->notes }}</i></p>
+                    <?php } ?>
+                </td>
                 <td>{{ $pdct->count }}</td>
                 <td>{{ $pdct->extraOption() }}</td>
             </tr>

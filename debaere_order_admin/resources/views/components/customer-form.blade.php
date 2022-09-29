@@ -33,11 +33,15 @@
             </div>
             
              <div class="row">
-                <div class="col-md-6 form-floating mb-3">
+                <div class="col-md-4 form-floating mb-3">
+                        <input type="text" class="form-control" value="{{ $customer->customer_number }}" id="customer_number" name="customer_number" required="required" >
+                        <label class="ml-2" for="title">Customer Number</label>
+                </div>
+                <div class="col-md-4 form-floating mb-3">
                         <input type="text" class="form-control" value="{{ $customer->contact_number }}" id="contact_number" name="contact_number" required="required" >
                         <label class="ml-2" for="title">Contact Number</label>
                 </div>
-                 <div class="col-md-6 form-floating mb-3">
+                 <div class="col-md-4 form-floating mb-3">
                         <input type="text" class="form-control" value="{{ $customer->contact_person }}" id="contact_person" name="contact_person" required="required" >
                         <label class="ml-2" for="title">Contact Person</label>
                 </div>
@@ -60,7 +64,7 @@
                     </div>
                     <div class="col-md-12 form-floating mb-3">
                         <input type="text" class="form-control required" value="{{ $customer->address_4 }}" id="address_4" name="address_4">
-                        <label class="ml-2" style="color:red;" for="title">Address 4 *</label>
+                        <label class="ml-2" style="color:red;" for="title">Post Code *</label>
                     </div>
                 </div>
 
@@ -79,7 +83,7 @@
                     </div>
                     <div class="col-md-12 form-floating mb-3">
                         <input type="text" class="form-control required" value="{{ $customer->d_address_4 }}" id="d_address_4" name="d_address_4">
-                        <label class="ml-2 required" style="color:red;" for="title">Delivery Address 4 *</label>
+                        <label class="ml-2 required" style="color:red;" for="title">Post Code *</label>
                     </div>
                 </div>
             </div>
