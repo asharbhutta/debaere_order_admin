@@ -60,7 +60,7 @@
                     </div>
                     <div class="col-md-12 form-floating mb-3">
                         <input type="text" class="form-control required" value="{{ $customer->address_4 }}" id="address_4" name="address_4">
-                        <label class="ml-2" for="title">Address 4</label>
+                        <label class="ml-2" style="color:red;" for="title">Address 4 *</label>
                     </div>
                 </div>
 
@@ -79,7 +79,7 @@
                     </div>
                     <div class="col-md-12 form-floating mb-3">
                         <input type="text" class="form-control required" value="{{ $customer->d_address_4 }}" id="d_address_4" name="d_address_4">
-                        <label class="ml-2 required" for="title">Delivery Address 4</label>
+                        <label class="ml-2 required" style="color:red;" for="title">Delivery Address 4 *</label>
                     </div>
                 </div>
             </div>

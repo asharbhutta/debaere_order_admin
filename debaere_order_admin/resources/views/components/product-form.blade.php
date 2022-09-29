@@ -86,7 +86,7 @@
     
 
             <div class="row">
-                <div class="col-sm-5 ml-3 mt-3">
+                <div class="col-sm-4 ml-3 mt-3">
                      <div class="form-check">
                         <input class="form-check-input" type="radio" name="status" id="LondonDist" value="1" {{ $product->status == 1 ? "checked" : "" }}>
                         <label class="form-check-label" for="LondonDist">
@@ -101,7 +101,7 @@
                     </div>
                 </div>
 
-                 <div class="col-sm-5 ml-3 mt-3">
+                 <div class="col-sm-4 ml-3 mt-3">
                      <div class="form-check">
                         <input class="form-check-input" type="radio" name="sliced" id="sliced" value="yes" {{ $product->sliced == "yes" ? "checked" : "" }}>
                         <label class="form-check-label" for="LondonDist">
@@ -112,6 +112,21 @@
                         <input class="form-check-input" type="radio" name="sliced" id="surreyDist" value="no" {{ $product->sliced == "no" ? "checked" : "" }} >
                         <label class="form-check-label" for="LondonDist">
                             Unsliced
+                        </label>
+                    </div>
+                </div>
+
+                 <div class="col-sm-4 ml-3 mt-3">
+                     <div class="form-check">
+                        <input class="form-check-input" type="radio" name="enable_notes"  value="1" {{ $product->enable_notes == 1 ? "checked" : "" }}>
+                        <label class="form-check-label" for="LondonDist">
+                            Notes Enabled
+                        </label>
+                    </div>
+                     <div class="form-check">
+                        <input class="form-check-input" type="radio" name="enable_notes"  value="0" {{ $product->enable_notes == 0 ? "checked" : "" }} >
+                        <label class="form-check-label" for="LondonDist">
+                            Notes Disabled
                         </label>
                     </div>
                 </div>

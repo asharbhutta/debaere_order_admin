@@ -61,7 +61,9 @@ class ProductController extends Controller
                 "pack_size" => "max:25",
                 "shelf" => "max:55",
                 "storage" => "max:555",
-                "sliced"=>"max:20"
+                "sliced"=>"max:20",
+                'enable_notes'=>'numeric'
+
             ]);
 
 
@@ -148,7 +150,8 @@ class ProductController extends Controller
                 "pack_size" => "max:25",
                 "shelf" => "max:55",
                 "storage" => "max:555",
-                "sliced"=>"max:20"
+                "sliced"=>"max:20",
+                'enable_notes'=>'numeric'
             ]);
 
             $validatedData["description"]=strip_tags($validatedData["description"]);
@@ -159,9 +162,11 @@ class ProductController extends Controller
 
             $model=$model->update($validatedData);
             if($request->hasFile('image'))
-            {   $pImage = new ProductImages();
+            {  
+                ProductImages::where('product_id',$id)->delete();
+                $pImage = new ProductImages();
                 $pImage->path = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
-                $pImage->product_id=$model->id;
+                $pImage->product_id=$id;
                 $pImage->save();
             }
 

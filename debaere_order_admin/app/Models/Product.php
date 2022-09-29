@@ -107,7 +107,8 @@ class Product extends Model
             'pack_size'=>$pack_size,
             'shelf'=>$product->shelf,
             'storage'=>$product->storage,
-            'sliceOption'=>$sliceOption
+            'sliceOption'=>$sliceOption,
+            'enable_notes'=>$product->enable_notes
             ];
         }
 

@@ -139,6 +139,17 @@
             }, 5000);
 
 
+            $("#sameAsMain").change(function() {
+                if(this.checked) 
+                {
+                    $("#d_address_1").val($("#address_1").val());
+                    $("#d_address_2").val($("#address_2").val());
+                    $("#d_address_3").val($("#address_3").val());
+                    $("#d_address_4").val($("#address_4").val());
+                }
+            });
+
+
 
 
         });
