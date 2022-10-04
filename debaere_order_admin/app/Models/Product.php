@@ -73,7 +73,7 @@ class Product extends Model
     public static function getActiveProducts()
     {
         $arr=[];
-        $products=Product::Where('status','=',1)->get();
+        $products=Product::Where('status','=',1)->orderBy('sequence')->get();
         foreach($products as $product)
         {   
             $sliced=0;

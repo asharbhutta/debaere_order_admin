@@ -62,8 +62,8 @@ class ProductController extends Controller
                 "shelf" => "max:55",
                 "storage" => "max:555",
                 "sliced"=>"max:20",
-                'enable_notes'=>'numeric'
-
+                'enable_notes'=>'numeric',
+                 'sequence'=>'numeric'
             ]);
 
 
@@ -151,7 +151,8 @@ class ProductController extends Controller
                 "shelf" => "max:55",
                 "storage" => "max:555",
                 "sliced"=>"max:20",
-                'enable_notes'=>'numeric'
+                'enable_notes'=>'numeric',
+                'sequence'=>'numeric'
             ]);
 
             $validatedData["description"]=strip_tags($validatedData["description"]);
