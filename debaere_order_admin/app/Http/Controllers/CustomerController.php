@@ -66,10 +66,10 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
          $validatedData = $request->validate([
-           "name" => "required|min:5|max:255",
-            "company_name" => "required|min:5|max:255",
+           "name" => "required|min:3|max:255",
+            "company_name" => "required|min:3|max:255",
             "contact_number" => "required|numeric",
-            "contact_person" => "required|min:5|max:255",
+            "contact_person" => "required|min:3|max:255",
             "address_1" => "max:255",
             "address_2" => "max:255",
             "address_3" => "max:255",
@@ -81,8 +81,9 @@ class CustomerController extends Controller
             "location" => "required",
             "status" => "required",
             "email" => 'required|email|unique:users',
-            "password" => "required",
-            "customer_number"=>"max:255" 
+            "password" => "required" ,
+            "customer_number"=>"max:255" ,
+
         ]);
 
         
@@ -132,10 +133,10 @@ class CustomerController extends Controller
         {
         
             $validatedData = $request->validate([
-                "name" => "required|min:5|max:255",
-                "company_name" => "required|min:5|max:255",
+                "name" => "required|min:3|max:255",
+                "company_name" => "required|min:3|max:255",
                 "contact_number" => "required|numeric",
-                "contact_person" => "required|min:5|max:255",
+                "contact_person" => "required|min:3|max:255",
                 "address_1" => "max:255",
                 "address_2" => "max:255",
                 "address_3" => "max:255",
@@ -148,7 +149,6 @@ class CustomerController extends Controller
                 "status" => "required",
                 "password"=>"max:20",
                 "customer_number"=>"max:255" ,
-
                 'email' => Rule::unique('users')->ignore($customer->user_id),
             ]);
 

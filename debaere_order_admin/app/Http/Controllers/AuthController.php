@@ -54,8 +54,6 @@ class AuthController extends Controller
                 'status' => 'success',
                 'user' => $user,
                 'customer'=>$user->customer,
-                'offerings'=>Offering::getActiveOfferings(),
-                'products'=>Product::getActiveProducts(),
                 'authorisation' => [
                     'token' => $token,
                     'type' => 'bearer',

@@ -20,9 +20,9 @@
             <a href="{{ route('admin_customer_admin') }}" class="nav-item nav-link  {{  strpos(request()->route()->getName(),'customer')!== false ? 'active' : ' ' }}"><i class="fa fa-user-alt me-2"></i>Customers</a>
             <a href="{{ route('admin_offering_admin') }}" class="nav-item nav-link  {{  strpos(request()->route()->getName(),'offering')!== false ? 'active' : ' ' }}"><i class="fa fa-cookie m-2"></i>Offerings</a>
              <a href="{{ route('admin_product_admin') }}" class="nav-item nav-link  {{  strpos(request()->route()->getName(),'product')!== false ? 'active' : ' ' }}"><i class="fa fa-bread-slice m-2"></i>Products</a>
-            <a href="{{ route('admin_order_admin') }}" class="nav-item nav-link  {{  strpos(request()->route()->getName(),'order')!== false ? 'active' : ' ' }}"><i class="fa fa-book m-2"></i>Orders</a>
-            <a href="{{ route('admin_promotion_index') }}" class="nav-item nav-link  {{  strpos(request()->route()->getName(),'promotion')!== false ? 'active' : ' ' }}"><i class="fa fa-book m-2"></i>Promotions</a>
+             <a href="{{ route('admin_order_admin') }}" class="nav-item nav-link  {{  strpos(request()->route()->getName(),'order')!== false ? 'active' : ' ' }}"><i class="fa fa-book m-2"></i>Orders</a>
+                         <a href="{{ route('admin_promotion_index') }}" class="nav-item nav-link  {{  strpos(request()->route()->getName(),'promotion')!== false ? 'active' : ' ' }}"><i class="fa fa-book m-2"></i>Promotions</a>
 
-            </div>
+        </div>
     </nav>
 </div>

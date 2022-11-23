@@ -81,8 +81,8 @@
                         <input type="text" class="form-control" value="{{ $product->storage }}" id="storage" name="storage" required="required" >
                         <label class="ml-2" for="title">Storage</label>
                 </div>
-                 <div class="col-md-3 form-floating mb-3">
-                        <input type="text" class="form-control" value="{{ $product->sequence }}" id="storage" name="sequence">
+                   <div class="col-md-3 form-floating mb-3">
+                        <input type="text" class="form-control" value="{{ $product->sequence }}" id="sequence" name="sequence">
                         <label class="ml-2" for="title">Sequence</label>
                 </div>
             </div>
@@ -162,8 +162,3 @@
             </div>   
         </div>
     </form>
-
-
-
-
-    

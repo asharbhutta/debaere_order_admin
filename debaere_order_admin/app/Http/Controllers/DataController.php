@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Offering;
 use App\Models\Product;
+use App\Models\Promotion;
+
 
 
 class DataController extends Controller
@@ -21,11 +23,14 @@ class DataController extends Controller
     {
         $offerings=Offering::getActiveOfferings();
         $products=Product::getActiveProducts();
+        $promotion=Promotion::findOrFail(1);
          
         return response()->json([
             'status' => 'success',
             'offerings' => $offerings,
-            'products' => $products
+            'products' => $products,
+             'promotion'=> $promotion
+
         ]);
     }
    

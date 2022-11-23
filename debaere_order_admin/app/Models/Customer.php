@@ -26,6 +26,7 @@ class Customer extends Model
             "status",
             'user_id',
             'customer_number'
+
     ];
     
     protected $with = ['user'];

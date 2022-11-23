@@ -5,7 +5,7 @@
 
 <html lang="en">
 <head>
-<title>Order Recipt</title>
+<title>Order Confirmation Recipt</title>
 
    <style type="text/css">
    	
@@ -60,10 +60,10 @@ tr:nth-child(even) {
               <img src="{{ URL::asset('img/debaere_logo.png') }}" style="width:30%" >
     </div>
     
-     <?php if($order->confirm_order==true){ ?> <a target="blank" href="{{ route('confirm_order_mail',['id'=>$order->id]) }}" >Send Confirmation Email</a>
-        <br>
-     <a target="blank" href="mailto:{{$order->customer->user->email}}" subject="Order # {{ $order->order_no }}"  >Reply To Customer</a>
-     <?php } ?> 
+     <div style="text-align:center; margin:15px;">
+              <h2>Dear {{ $order->customer->company_name }},  Your Following Order with order # {{ $order->order_no }}, Has Been Confirmed</h2>
+    </div>
+
 
   
      

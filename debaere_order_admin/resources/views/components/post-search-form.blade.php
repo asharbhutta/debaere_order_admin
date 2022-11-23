@@ -2,27 +2,27 @@
      <td>
      </td>
      <td>
-         <input name="title" type="text" value="{{ Request::get('title') }}" class="form-control">
+         <input name="name" type="text" value="{{ Request::get('name') }}" class="form-control product-form">
      </td>
      <td>
+         <input name="product_number" type="text" value="{{ Request::get('product_number') }}" class="form-control product-form">
      </td>
      <td>
-         <x-tags-dropdown />
+         <x-offering-dropdown />
+     </td>
+      <td>
+         <x-product-sliced-dropdown  name="sliced" />
      </td>
      <td>
-         <x-boolean-dropdown name="approved" />
+         <x-status-dropdown name="status" />
      </td>
      <td>
-         <x-boolean-dropdown name="posted" />
-     </td>
-     <td>
-         <x-boolean-dropdown name="explaination" />
      </td>
  </form>
  @section ('page-js-script')
  <script type="text/javascript">
      $(document).ready(function() {
-         $('.form-control').on('change', function() {
+         $('.product-form').on('change', function() {
              $("#postSearchForm").submit();
          });
      });

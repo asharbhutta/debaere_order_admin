@@ -23,6 +23,8 @@
                                     <th scope="col">Offering </th>
                                     <th scope="col">Sliced/Unsliced</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col">Sequence</th>
+                                    <th></th>
                                 </tr>
                                  <tr>
                                     <x-product-search-form />

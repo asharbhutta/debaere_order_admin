@@ -2,10 +2,10 @@
      <td>
      </td>
      <td>
-         <input name="name" type="text" value="{{ Request::get('name') }}" class="form-control">
+         <input name="name" type="text" value="{{ Request::get('name') }}" class="form-control product-form">
      </td>
      <td>
-         <input name="product_number" type="text" value="{{ Request::get('product_number') }}" class="form-control">
+         <input name="product_number" type="text" value="{{ Request::get('product_number') }}" class="form-control product-form">
      </td>
      <td>
          <x-offering-dropdown />
@@ -22,7 +22,7 @@
  @section ('page-js-script')
  <script type="text/javascript">
      $(document).ready(function() {
-         $('.form-control').on('change', function() {
+         $('.product-form').on('change', function() {
              $("#postSearchForm").submit();
          });
      });

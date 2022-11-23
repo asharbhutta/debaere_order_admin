@@ -119,6 +119,27 @@
         // In your Javascript (external .js resource or <script> tag)
         $(document).ready(function() {
             $('.select2').select2();
+            
+            
+            $('.sequence-field').change('change',function(){
+
+                var id= $(this).attr('data-id');
+                var val=$(this).val();
+
+                 $.ajax({
+                method: "POST",
+                url: "{{ route('admin_product_update_sequence') }}",
+                data:{
+
+                     "_token": "{{ csrf_token() }}",
+                     "id": id,
+                     'sequence':val
+                }
+                }).done(function( msg ) {
+                
+            });
+
+            });
 
             $(".date").datepicker({
                 'format': 'y/mm/dd'
@@ -137,9 +158,9 @@
             setTimeout(function() {
                 $('.flashMessage').fadeOut('slow');
             }, 5000);
-
-
-            $("#sameAsMain").change(function() {
+            
+            
+              $("#sameAsMain").change(function() {
                 if(this.checked) 
                 {
                     $("#d_address_1").val($("#address_1").val());
@@ -148,6 +169,7 @@
                     $("#d_address_4").val($("#address_4").val());
                 }
             });
+
 
 
 

@@ -37,11 +37,24 @@ Route::get('mailview/{id}', function ($id) {
 
 Route::get('send-mail', function () {
    
-      $order=Order::findOrFail(23);
-    \Mail::to(['asharbhutta@gmail.com','pg@cc.com'])->send(new \App\Mail\OrderEmail($order));
+      $order=Order::findOrFail(169);
+      $order->confirm_order=true;
+
+    \Mail::to(['asharbhutta@gmail.com'])->send(new \App\Mail\OrderEmail($order));
    
     dd("Email is Sent.");
 });
+
+
+Route::get('send-confirm-order-mail/{id}', function ($id) {
+   
+      $order=Order::findOrFail($id);
+    \Mail::to($order->customer->user->email)->send(new \App\Mail\ConfirmOrderEmail($order));
+    dd("Confirmation Email is Sent Successfully.");
+})->name('confirm_order_mail');
+
+
+
 
 Auth::routes();
 
@@ -71,6 +84,11 @@ Route::group(
             Route::get('product/{id}/edit', [ProductController::class, 'edit'])->name('_product_edit');
             Route::post('product/{id}/edit', [ProductController::class, 'edit'])->name('_product_edit');
             Route::get('product/admin', [ProductController::class, 'admin'])->name('_product_admin');
+            Route::get('product/imageManipulate', [ProductController::class, 'manipulateProductImages'])->name('_product_manipulate');
+            Route::post('product/updateSequence', [ProductController::class, 'updateSequence'])->name('_product_update_sequence');
+
+            
+            
 
             Route::get('orders/admin', [OrdersController::class, 'admin'])->name('_order_admin');
             Route::get('orders//{id}/view', [OrdersController::class, 'view'])->name('_order_view');

@@ -33,6 +33,14 @@ class ProductController extends Controller
     {
         //
     }
+    
+       public function updateSequence(Request $request)
+    {
+        $model=Product::findOrFail($request->id);
+        $model->sequence=$request->sequence;
+        $model->update();
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -63,7 +71,8 @@ class ProductController extends Controller
                 "storage" => "max:555",
                 "sliced"=>"max:20",
                 'enable_notes'=>'numeric',
-                 'sequence'=>'numeric'
+                'sequence'=>'numeric'
+
             ]);
 
 
@@ -153,6 +162,7 @@ class ProductController extends Controller
                 "sliced"=>"max:20",
                 'enable_notes'=>'numeric',
                 'sequence'=>'numeric'
+
             ]);
 
             $validatedData["description"]=strip_tags($validatedData["description"]);
@@ -206,5 +216,106 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    public function manipulateProductImages()
+    {
+        
+       // $products=Product::Where('status','=',1)->get();
+        
+        // foreach($products as $product)
+        // {
+        //     if(isset($product->productImage))
+        //     {
+        //         $productImage=$product->productImage;
+        //         $path=$product->productImage->path;
+        //         if(strpos($path,'https')==false)
+        //         {
+        //             $url=$product->getImageUrl();
+        //             $url=str_replace("https","http",$url);
+        //           // echo $url."<br>";
+        //             $spath=storage_path('thumb.jpg');
+        //             //echo $spath;
+        //             $file=$this->thumbnail($url,$spath);
+        //             $productImage->path = cloudinary()->upload($url)->getSecurePath();
+        //             echo $productImage->path."<br>";
+        //             $productImage->update();
+        //             echo $product->name."<br>";
+
+        //         }
+        //     }
+        // }
+        
+          $offerings=Offering::Where('status','=',1)->get();
+        
+        foreach($offerings as $offering)
+        {
+            if(isset($offering->icon))
+            {
+               
+                $path=$offering->icon;;
+                if(strpos($path,'https')==false)
+                {
+                    $url=$offering->getIconUrl();
+                    $url=str_replace("https","http",$url);
+                  
+                    $offering->icon = cloudinary()->upload($url)->getSecurePath();
+                    echo $offering->icon."<br>";
+                    $offering->update();
+                    echo $offering->name."<br>";
+
+                }
+            }
+        }
+    }
+    
+      public function manipulateOfferingImages()
+    {
+        
+        $offerings=Offering::Where('status','=',1)->get();
+        
+        foreach($offerings as $offering)
+        {
+            if(isset($offering->icon))
+            {
+               
+                $path=$product->icon;;
+                if(strpos($path,'https')==false)
+                {
+                    $url=$product->getIconUrl();
+                    $url=str_replace("https","http",$url);
+                  
+                    $offering->icon = cloudinary()->upload($url)->getSecurePath();
+                    echo $offering->icon."<br>";
+                    $offering->update();
+                    echo $offering->name."<br>";
+
+                }
+            }
+        }
+    }
+    
+    function thumbnail($url, $filename, $width = 300, $height = true) 
+	{
+	    
+	    $arrContextOptions=array(
+              
+            );  
+     // download and create gd image
+     $image = ImageCreateFromString(file_get_contents($url));
+    
+     // calculate resized ratio
+     // Note: if $height is set to TRUE then we automatically calculate the height based on the ratio
+     $height = $height === true ? (ImageSY($image) * $width / ImageSX($image)) : $height;
+    
+     // create image 
+     $output = ImageCreateTrueColor($width, $height);
+     ImageCopyResampled($output, $image, 0, 0, 0, 0, $width, $height, ImageSX($image), ImageSY($image));
+    
+     // save image
+     ImageJPEG($output, $filename, 95); 
+    
+     // return resized image
+     return $output; // if you need to use it
     }
 }

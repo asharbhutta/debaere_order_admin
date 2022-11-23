@@ -42,7 +42,9 @@ return [
             'username' => env('MAIL_USERNAME'),
             'password' => env('MAIL_PASSWORD'),
             'timeout' => null,
-            'auth_mode' => null,
+            'auth_mode' => null
+    
+
         ],
 
         'ses' => [
@@ -78,6 +80,8 @@ return [
                 'log',
             ],
         ],
+        
+            
     ],
 
     /*

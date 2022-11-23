@@ -9,6 +9,8 @@ use App\Models\Offering;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Mail\OrderEmail;
+use App\Models\Promotion;
+
 
 
 
@@ -24,11 +26,13 @@ class OrderController extends Controller
     {
         $offerings=Offering::getActiveOfferings();
         $products=Product::getActiveProducts();
+        $promotion=Promotion::findOrFail(1);
          
         return response()->json([
             'status' => 'success',
             'offerings' => $offerings,
-            'products' => $products
+            'products' => $products,
+            'promotion'=> $promotion
         ]);
     }
 
@@ -57,7 +61,7 @@ class OrderController extends Controller
                 $orderProduct->product_id=$op["product_id"];
                 $orderProduct->sliced=$op["sliced"];
                 $orderProduct->count=$op["count"];
-                if(isset($op["notes"]))
+                 if(isset($op["notes"]))
                 $orderProduct->notes=$op["notes"];
 
                 $orderProduct->save();
@@ -103,6 +107,11 @@ class OrderController extends Controller
                 $pOrder=["id"=>$op->product_id,"name"=>$op->product->name,"count"=>$op->count,"sliced"=>$op->sliced,"optionText"=>$optionText];
                 if($optionText!="N/A")
                 $pOrder["sliceOption"]=$optionText;
+                
+                if(isset($op->notes) && !empty($op->notes))
+                {
+                    $pOrder["optionText"]=$op->notes;
+                }
 
                 $productsArr[]=$pOrder;
             }
@@ -123,7 +132,18 @@ class OrderController extends Controller
     {
         $orderEmails=[];
         $orderEmails[]="asharbhutta@gmail.com";
-        $orderEmails[]=$order->customer->user->email;
+        
+        if($order->customer->user->email!="bhuttaashar@gmail.com")
+        {
+            $orderEmails[]="kaleembhutta@debaere.co.uk";
+            $orderEmails[]="orders@debaere.co.uk";
+
+        }
+        
+        \Mail::to($order->customer->user->email)->send(new OrderEmail($order));
+        $order->confirm_order=true;
+        
+        //$orderEmails[]=$order->customer->user->email;
         \Mail::to($orderEmails)->send(new OrderEmail($order));
     }
    

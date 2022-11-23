@@ -1,7 +1,7 @@
 @props(['member'])
 <tr>
     <td>{{$member->index}}</td>
-    <td>{{$member->name}}</td>
+    <td>{{$member->company_name}}</td>
     <td>{{$member->contact_number}}</td>
     <td>{{$member->user->email}}</td>
     <td>

@@ -12,9 +12,8 @@ use App\Models\OrderProduct;
 class Order extends Model
 {
     use HasFactory;
-
-
-     public static function searchContent($request)
+    
+    public static function searchContent($request)
     {
         
         
