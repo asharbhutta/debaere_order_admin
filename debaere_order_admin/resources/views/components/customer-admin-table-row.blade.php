@@ -14,6 +14,9 @@
         <td>
               <x-customer-edit-btn text="" :member="$member" />
               <x-customer-delete-btn text="" :member="$member" />
+              <x-customer-edit-pricing-btn text="" :member="$member" />
+
+
         </td>
     </td>
 </tr>

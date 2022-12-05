@@ -7,6 +7,8 @@ use App\Http\Controllers\ProductController;
 use App\Models\Order;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\PromotionController;
+use App\Http\Controllers\CustomerPricesController;
+
 
 
 
@@ -86,16 +88,19 @@ Route::group(
             Route::get('product/admin', [ProductController::class, 'admin'])->name('_product_admin');
             Route::get('product/imageManipulate', [ProductController::class, 'manipulateProductImages'])->name('_product_manipulate');
             Route::post('product/updateSequence', [ProductController::class, 'updateSequence'])->name('_product_update_sequence');
-
-            
-            
-
+        
             Route::get('orders/admin', [OrdersController::class, 'admin'])->name('_order_admin');
             Route::get('orders//{id}/view', [OrdersController::class, 'view'])->name('_order_view');
             Route::get('product/{id}/replicate', [ProductController::class, 'replicate'])->name('_product_replicate');
 
             Route::post('promotion/index', [PromotionController::class, 'index'])->name('_promotion_index');
             Route::get('promotion/index', [PromotionController::class, 'index'])->name('_promotion_index');
+
+            Route::post('pricing/import', [CustomerPricesController::class, 'import'])->name('_customer_pricing_import');
+            Route::get('pricing/import', [CustomerPricesController::class, 'import'])->name('_customer_pricing_import');
+            Route::get('pricing/priceList', [CustomerPricesController::class, 'allCustomerPriceList'])->name('_customer_pricing_list');
+            Route::get('pricing/{id}/customerPrices', [CustomerPricesController::class, 'customerPrices'])->name('_customer_pricing_edit');
+
 
 
 

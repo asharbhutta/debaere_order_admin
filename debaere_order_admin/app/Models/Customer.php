@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use App\Models\CustomerProductPrices;
 
 
 class Customer extends Model
@@ -25,7 +26,8 @@ class Customer extends Model
             "location",
             "status",
             'user_id',
-            'customer_number'
+            'customer_number',
+            'min_order_price'
 
     ];
     
@@ -37,6 +39,11 @@ class Customer extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function customPrice()
+    {
+        return $this->hasOne(CustomerProductPrices::class, 'customer_id');
     }
 
     public function getLocation()

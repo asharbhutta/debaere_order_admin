@@ -71,7 +71,7 @@
                 @endif
 
                 @if(Session::has('error'))
-                    <div class="alert alert-error flashMessage" role="alert">
+                    <div class="alert alert-danger flashMessage" role="alert">
                         {{ Session::get('error') }}
                     </div>
                 @endif

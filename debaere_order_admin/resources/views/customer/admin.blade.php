@@ -7,8 +7,11 @@
                     <div class="col-md-3">
                         <h2 class="mb-4">All Customers</h2>
                     </div>
-                    <div class="col-md-2 offset-md-7">
+                    <div class="col-md-2 offset-md-4">
                         <a class="btn btn-outline-primary" href="{{ route('admin_customer_create') }}" >Create Customer</a>
+                    </div>
+                    <div class="col-md-2 ">
+                        <a class="btn btn-outline-success" href="{{ route('admin_customer_pricing_import') }}" >Import Customer Pricing File</a>
                     </div>
                 </div>
                 <hr>

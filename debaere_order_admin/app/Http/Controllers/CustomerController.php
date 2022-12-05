@@ -83,6 +83,7 @@ class CustomerController extends Controller
             "email" => 'required|email|unique:users',
             "password" => "required" ,
             "customer_number"=>"max:255" ,
+            "min_order_price"=>"required"
 
         ]);
 
@@ -149,6 +150,7 @@ class CustomerController extends Controller
                 "status" => "required",
                 "password"=>"max:20",
                 "customer_number"=>"max:255" ,
+                "min_order_price"=>"required",
                 'email' => Rule::unique('users')->ignore($customer->user_id),
             ]);
 
