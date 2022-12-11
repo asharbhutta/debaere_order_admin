@@ -205,10 +205,7 @@ class CustomerPricesController extends Controller
     public function allCustomerPriceList(Request $request)
     {
         $product_ids=[];
-        $uniqueProducts=DB::table('customer_product_prices')
-        ->select('product_id')
-        ->groupBy('product_id')
-        ->get();
+        $uniqueProducts=DB::table('customer_product_prices')->select('product_id')->groupBy('product_id')->get();
         foreach($uniqueProducts as $product)
         {
             $product_ids[]=$product->product_id;

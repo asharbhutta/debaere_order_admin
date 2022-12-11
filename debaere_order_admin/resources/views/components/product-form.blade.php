@@ -135,6 +135,27 @@
                     </div>
                 </div>
 
+                <div class="col-sm-4 ml-3 mt-3">
+                     <div class="form-check">
+                        <input class="form-check-input" type="radio" name="prior_notice" id="LondonDist" value="0" {{ $product->prior_notice == 0 ? "checked" : "" }}>
+                        <label class="form-check-label" for="LondonDist">
+                            Not Applicable
+                        </label>
+                    </div>
+                     <div class="form-check">
+                        <input class="form-check-input" type="radio" name="prior_notice" id="surreyDist" value="48" {{ $product->prior_notice == 48 ? "checked" : "" }} >
+                        <label class="form-check-label" for="LondonDist">
+                            48 Hour Prep Time
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="prior_notice" id="surreyDist" value="72" {{ $product->prior_notice == 72 ? "checked" : "" }} >
+                        <label class="form-check-label" for="LondonDist">
+                            72 Hour Prep Time
+                        </label>
+                    </div>
+                </div>
+
             </div>
             <hr>
             <div class="row">

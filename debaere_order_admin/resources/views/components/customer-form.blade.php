@@ -22,17 +22,21 @@
         @csrf
         <div class="bg-light rounded h-100 p-4">
             <div class="row">
-                <div class="col-md-4 form-floating mb-3">
+                <div class="col-md-3 form-floating mb-3">
                         <input type="text" class="form-control" value="{{ $customer->name }}" id="name" name="name" required="required" >
                         <label class="ml-2" for="name">Name</label>
                 </div>
-                 <div class="col-md-4 form-floating mb-3">
+                 <div class="col-md-3 form-floating mb-3">
                         <input type="text" class="form-control" value="{{ $customer->company_name }}" id="company_name" name="company_name" required="required" >
                         <label class="ml-2" for="title">Company Name</label>
                 </div>
-                <div class="col-md-4 form-floating mb-3">
+                <div class="col-md-3 form-floating mb-3">
                         <input type="text" class="form-control" value="{{ $customer->min_order_price }}" id="min_order_price" name="min_order_price" required="required" >
                         <label class="ml-2" for="title">Minimum Order Price</label>
+                </div>
+                <div class="col-md-3 form-floating mb-3">
+                        <input type="text" class="form-control" value="{{ $customer->dilivery_charges }}" id="dilivery_charges" name="dilivery_charges" required="required" >
+                        <label class="ml-2" for="title">Delivery Charges</label>
                 </div>
             </div>
             

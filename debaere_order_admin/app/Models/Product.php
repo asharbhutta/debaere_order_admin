@@ -70,7 +70,7 @@ class Product extends Model
         return $data->paginate(20);
     }
 
-    public static function getActiveProducts()
+    public static function getActiveProducts($pricesArr=[])
     {
         $arr=[];
         $products=Product::Where('status','=',1)->orderBy('sequence')->get();
@@ -87,10 +87,11 @@ class Product extends Model
             $pack_size=1;
 
             $packSizeArr=explode(" ",$product->pack_size);
-            
             if(isset($packSizeArr[count($packSizeArr)-1]))
             $pack_size=$packSizeArr[count($packSizeArr)-1];
-
+            $price=$product->price;
+            if(isset($pricesArr[$product->id]))
+            $price=$pricesArr[$product->id];
 
             $arr[]=[
             "id"=>$product->id,
@@ -108,7 +109,9 @@ class Product extends Model
             'shelf'=>$product->shelf,
             'storage'=>$product->storage,
             'sliceOption'=>$sliceOption,
-            'enable_notes'=>$product->enable_notes
+            'enable_notes'=>$product->enable_notes,
+            'price'=>$price,
+            'prior_notice'=>$product->prior_notice
 
             ];
         }

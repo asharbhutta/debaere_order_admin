@@ -71,7 +71,10 @@ class ProductController extends Controller
                 "storage" => "max:555",
                 "sliced"=>"max:20",
                 'enable_notes'=>'numeric',
-                'sequence'=>'numeric'
+                'sequence'=>'numeric',
+                'prior_notice'=>'numeric'
+
+
 
             ]);
 
@@ -161,7 +164,9 @@ class ProductController extends Controller
                 "storage" => "max:555",
                 "sliced"=>"max:20",
                 'enable_notes'=>'numeric',
-                'sequence'=>'numeric'
+                'sequence'=>'numeric',
+                'prior_notice'=>'numeric'
+
 
             ]);
 

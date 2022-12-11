@@ -27,7 +27,8 @@ class Customer extends Model
             "status",
             'user_id',
             'customer_number',
-            'min_order_price'
+            'min_order_price',
+            'dilivery_charges'
 
     ];
     
@@ -45,6 +46,12 @@ class Customer extends Model
     {
         return $this->hasOne(CustomerProductPrices::class, 'customer_id');
     }
+
+    public function customPrices()
+    {
+        return $this->hasMany(CustomerProductPrices::class, 'customer_id');
+    }
+
 
     public function getLocation()
     {
@@ -78,5 +85,20 @@ class Customer extends Model
         $data->orderBy('users.created_at', 'desc');
         
         return $data->paginate(20);
+    }
+
+    public function getCustomPriceArr()
+    {
+        $customPrices=$this->customPrices;
+        $customPriceArr=[];
+        if(!empty($customPrices))
+        {
+            foreach($customPrices as $cPrice)
+            {
+                $customPriceArr[$cPrice->product_id]=$cPrice->price;
+            }
+        }
+
+        return $customPriceArr;
     }
 }

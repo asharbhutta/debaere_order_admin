@@ -10,6 +10,8 @@ use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Mail\OrderEmail;
 use App\Models\Promotion;
+use App\Models\Product;
+
 
 
 
@@ -25,7 +27,7 @@ class OrderController extends Controller
     public function getData()
     {
         $offerings=Offering::getActiveOfferings();
-        $products=Product::getActiveProducts();
+       // $products=Product::getActiveProducts();
         $promotion=Promotion::findOrFail(1);
          
         return response()->json([
@@ -41,6 +43,11 @@ class OrderController extends Controller
         $data = $request->json()->all();
         $user = auth('api')->user();
         $customer=$user->customer;
+        $customPricesArr=$customer->getCustomPriceArr();
+        $min_order_price=$customer->min_order_price;
+        $dilivery_charges=$customer->dilivery_charges;
+        $totalOrderPrice=0;
+
         if(isset($data) && isset($data["order_date"]) && isset($data["order_products"]))
         {
             $orderDate=$data["order_date"];
@@ -56,15 +63,35 @@ class OrderController extends Controller
 
             foreach($orderProducts as $op)
             {
+                $unit_price=0;
+                if(isset($customPricesArr[$op["product_id"]]))
+                {
+                    $unit_price=$customPricesArr[$op["product_id"]];
+                }
+                else
+                {
+                    $product=Product::findOrFail($op["product_id"]);
+                    $unit_price=$product->price;
+                }
+
                 $orderProduct=new OrderProduct;
                 $orderProduct->order_id = $order->id;
                 $orderProduct->product_id=$op["product_id"];
                 $orderProduct->sliced=$op["sliced"];
                 $orderProduct->count=$op["count"];
+                $orderProduct->unit_price=$unit_price;
+                $totalOrderPrice=$totalOrderPrice+($op["count"] * $unit_price);
+
                  if(isset($op["notes"]))
                 $orderProduct->notes=$op["notes"];
 
                 $orderProduct->save();
+            }
+
+            if($totalOrderPrice<$min_order_price)
+            {
+                $order->delivery_charges=$dilivery_charges;
+                $order->update();
             }
 
             $this->sendOrderEmail($order);
