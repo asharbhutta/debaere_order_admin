@@ -179,12 +179,21 @@ class CustomerPricesController extends Controller
 
                 foreach($productPrices as $k=>$v)
                 {
-                    $cPriceModel=new CustomerProductPrices;
-                    $cPriceModel->customer_id=$customer_id;
-                    $cPriceModel->product_id=$k;
-                    $cPriceModel->price=$v;
+                    $mainProduct=Product::where('id', '=',$k)->first(); 
+                    $similarProducts=Product::where('product_number', '=',$mainProduct->product_number)->get();
+                    
 
-                    $cPriceModel->save();
+                    foreach($similarProducts as $simProduct)
+                    {
+                        $cPriceModel=new CustomerProductPrices;
+                        $cPriceModel->customer_id=$customer_id;
+                        $cPriceModel->product_id=$simProduct->id;;
+                        $cPriceModel->price=$v;
+
+                        $cPriceModel->save();
+                    }
+
+                    
                 }
                 
             }

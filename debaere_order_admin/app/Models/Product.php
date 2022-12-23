@@ -110,7 +110,7 @@ class Product extends Model
             'storage'=>$product->storage,
             'sliceOption'=>$sliceOption,
             'enable_notes'=>$product->enable_notes,
-            'price'=>$price,
+            'price'=>round($price,2),
             'prior_notice'=>$product->prior_notice
 
             ];
