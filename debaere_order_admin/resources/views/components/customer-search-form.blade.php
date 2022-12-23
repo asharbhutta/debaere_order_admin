@@ -4,8 +4,9 @@
      <td>
          <input name="company_name" type="text" value="{{ Request::get('company_name') }}" class="form-control">
      </td>
+    
      <td>
-        <input name="contact_number" type="text" value="{{ Request::get('contact_number') }}" class="form-control">
+        <input name="contact_number" type="text" value="{{ Request::get('customer_number') }}" class="form-control">
      </td>
      <td>
         <input name="email" type="text" value="{{ Request::get('email') }}" class="form-control">

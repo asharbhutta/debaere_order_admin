@@ -2,7 +2,7 @@
 <tr>
     <td>{{$member->index}}</td>
     <td>{{$member->company_name}}</td>
-    <td>{{$member->contact_number}}</td>
+    <td>{{$member->customer_number}}</td>
     <td>{{$member->user->email}}</td>
     <td>
         <x-location-badge :location="$member->location" />

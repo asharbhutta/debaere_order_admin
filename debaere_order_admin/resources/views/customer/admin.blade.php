@@ -13,6 +13,12 @@
                     <div class="col-md-2 ">
                         <a class="btn btn-outline-success" href="{{ route('admin_customer_pricing_import') }}" >Import Customer Pricing File</a>
                     </div>
+                    
+                </div>
+                <div class="row">
+                     <div class="col-md-2 offset-md-8">
+                        <a class="btn btn-outline-warning" href="{{ route('admin_customer_pricing_list') }}" >Download Customer Pricing File</a>
+                    </div>
                 </div>
                 <hr>
                  <div class="row">
@@ -22,7 +28,7 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Company Name</th>
-                                    <th scope="col">Contact Number</th>
+                                    <th scope="col">Customer Number</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Location</th>
                                     <th scope="col">Status</th>

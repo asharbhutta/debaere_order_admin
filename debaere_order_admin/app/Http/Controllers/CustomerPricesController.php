@@ -214,13 +214,73 @@ class CustomerPricesController extends Controller
     public function allCustomerPriceList(Request $request)
     {
         $product_ids=[];
-        $uniqueProducts=DB::table('customer_product_prices')->select('product_id')->groupBy('product_id')->get();
+        $uniqueProducts=DB::select('SELECT DISTINCT product_id,products.product_number,products.name FROM customer_product_prices INNER JOIN products ON customer_product_prices.product_id = products.id order by products.product_number');
+        $masterArr=[];
+        $headerArr=[];
+        $productNameArr=[];
+        $customerPricingArr=[];
+        array_push($headerArr,"Customer Name");
+        array_push($headerArr,"Customer Email");
+        array_push($headerArr,"Customer Number");
+        array_push($headerArr,"Min Order");
+        //
+        array_push($productNameArr,"");
+        array_push($productNameArr,"");
+        array_push($productNameArr,"");
+        array_push($productNameArr,"");
         foreach($uniqueProducts as $product)
         {
             $product_ids[]=$product->product_id;
+            array_push($headerArr,$product->product_number);
+            array_push($productNameArr,$product->name);
         }
 
-        dd($product_ids);
+        $masterArr[]=$headerArr;
+        $masterArr[]=$productNameArr;
+
+        $customPricingCustomers=DB::select("SELECT DISTINCT customer_id FROM customer_product_prices");
+        foreach($customPricingCustomers as $pricing)
+        {
+            $customerPriceArr=[];
+            $customer=Customer::findOrFail($pricing->customer_id);
+            $customerPriceArr[]=$customer->name;
+            $customerPriceArr[]=$customer->user->email;
+            $customerPriceArr[]=$customer->customer_number;
+            $customerPriceArr[]=$customer->min_order_price;
+            $customerPricesModel=DB::select("SELECT customer_product_prices.* FROM customer_product_prices INNER JOIN products ON products.id=customer_product_prices.product_id WHERE customer_product_prices.customer_id=".$customer->id." ORDER BY products.product_number");
+            foreach($customerPricesModel as $cProdPrice)
+            {
+                $customerPriceArr[]=$cProdPrice->price;
+            }
+
+            $masterArr[]=$customerPriceArr;
+
+        }
+
+        $fileName="CustomerPricingFile.csv";
+        $headers = array(
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        );
+
+        // $file = fopen('php://output', 'w');
+        // fputcsv($file, $masterArr);
+        // fclose($file);
+
+        $callback = function() use( $masterArr) {
+            $file = fopen('php://output', 'w');
+            foreach ($masterArr as $row) {
+                fputcsv($file,$row);
+            }
+            fclose($file);
+        };
+
+
+        return response()->stream($callback, 200, $headers);
+
 
     }
 }
