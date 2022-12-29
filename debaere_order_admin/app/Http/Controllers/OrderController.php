@@ -11,7 +11,7 @@ use App\Models\OrderProduct;
 use App\Mail\OrderEmail;
 use App\Models\Promotion;
 use App\Models\Product;
-
+use App\Events\OrderisCreated;
 
 
 
@@ -94,7 +94,8 @@ class OrderController extends Controller
                 $order->update();
             }
 
-            $this->sendOrderEmail($order);
+            event(new OrderisCreated($order));
+            //$this->sendOrderEmail($order);
 
             return response()->json([
                 'status' => 'success',

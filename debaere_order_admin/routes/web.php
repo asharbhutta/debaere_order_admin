@@ -8,6 +8,8 @@ use App\Models\Order;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\CustomerPricesController;
+use App\Http\Controllers\HomeController;
+
 
 
 
@@ -100,6 +102,7 @@ Route::group(
             Route::get('pricing/import', [CustomerPricesController::class, 'import'])->name('_customer_pricing_import');
             Route::get('pricing/priceList', [CustomerPricesController::class, 'allCustomerPriceList'])->name('_customer_pricing_list');
             Route::get('pricing/{id}/customerPrices', [CustomerPricesController::class, 'customerPrices'])->name('_customer_pricing_edit');
+            Route::get('/backup_db', [App\Http\Controllers\HomeController::class, 'backupDB'])->name('backup');
 
 
 
