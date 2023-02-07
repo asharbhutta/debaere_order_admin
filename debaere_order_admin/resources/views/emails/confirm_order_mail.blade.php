@@ -55,6 +55,12 @@ tr:nth-child(even) {
 
 
 </head>
+
+ <?php
+    $totalPrice=0;
+   ?>
+
+
 <body style=" margin:10px;" >
     <div style="text-align:center; margin:5px;">
               <img src="{{ URL::asset('img/debaere_logo.png') }}" style="width:30%" >
@@ -159,17 +165,21 @@ tr:nth-child(even) {
 
     <?php  $products=$order->orderProducts ?>
 
-    <table style="margin-top:10px;" > 
+   <table style="margin-top:10px;" > 
         <thead>
         <tr>
             <th width="10%" >Product#</th>
-            <th width="60%" >Description</th>
+            <th width="40%" >Description</th>
             <th width="10%" >QTY</th>
+            <th width="10%" >Unit Price</th>
+            <th width="10%" >Price</th>
             <th width="20%" >Options</th>
         </tr>
         </thead>
         <tbody>
             @foreach($products as $pdct)
+            <?php $unitTotalPrice=$pdct->unit_price * $pdct->count; 
+            $totalPrice+=$unitTotalPrice; ?>
             <tr>
                 <td>{{ $pdct->product->product_number }}</td>
                 <td>{{ $pdct->product->name }}
@@ -179,9 +189,19 @@ tr:nth-child(even) {
                     <?php } ?>
                 </td>
                 <td>{{ $pdct->count }}</td>
+                <td>{{ $pdct->unit_price }}</td>
+                <td>{{ $unitTotalPrice }}</td>
                 <td>{{ $pdct->extraOption() }}</td>
             </tr>
             @endforeach
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><b>Total</b></td>
+                <td><b>{{ $totalPrice }}</b></td>
+                <td></td>
+            </tr>
         </tbody>
     </table>
 </body>
