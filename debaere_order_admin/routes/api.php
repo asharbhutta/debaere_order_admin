@@ -29,5 +29,7 @@ Route::controller(DataController::class)->group(function () {
 Route::controller(OrderController::class)->group(function () {
     Route::post('makeOrder', 'makeOrder');
     Route::get('previousOrders', 'previousOrders');
+    Route::post('getMinOrderPrice', 'getMinOrderPrice');
+
 
 });

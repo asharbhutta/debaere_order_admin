@@ -174,5 +174,24 @@ class OrderController extends Controller
         //$orderEmails[]=$order->customer->user->email;
         \Mail::to($orderEmails)->send(new OrderEmail($order));
     }
+
+    public function getMinOrderPrice(Request $request)
+    {   
+        $data = $request->json()->all();
+        $user = auth('api')->user();
+        $customer=$user->customer;
+        $min_order_price=$customer->min_order_price;
+        if(isset($data["date"]) && !empty($data["date"]))
+        {
+            $orders = Order::Where('customer_id',$customer->id)->Where('date',$data["date"])->get();
+            if(count($orders)>0)
+            $min_order_price=0;
+        }
+
+         return response()->json([
+            'status' => 'success',
+            'min_order_price' => $min_order_price
+        ]);
+    }
    
 }
