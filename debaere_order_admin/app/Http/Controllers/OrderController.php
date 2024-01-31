@@ -16,6 +16,8 @@ use App\Events\OrderisCreated;
 
 
 
+
+
 class OrderController extends Controller
 {
 
@@ -95,7 +97,7 @@ class OrderController extends Controller
             }
 
             event(new OrderisCreated($order));
-            //$this->sendOrderEmail($order);
+          //  $this->sendOrderEmail($order);
 
             return response()->json([
                 'status' => 'success',
@@ -132,7 +134,7 @@ class OrderController extends Controller
                     $optionText="unsliced";
                 }
 
-                $pOrder=["id"=>$op->product_id,"name"=>$op->product->name,"count"=>$op->count,"sliced"=>$op->sliced,"optionText"=>$optionText];
+                $pOrder=["id"=>$op->product_id,"name"=>$op->product->name,"count"=>$op->count,"sliced"=>$op->sliced,"optionText"=>$optionText,"unit_price"=>$op->unit_price];
                 if($optionText!="N/A")
                 $pOrder["sliceOption"]=$optionText;
                 
@@ -163,7 +165,7 @@ class OrderController extends Controller
         
         if($order->customer->user->email!="bhuttaashar@gmail.com")
         {
-            $orderEmails[]="kaleembhutta@debaere.co.uk";
+           // $orderEmails[]="kaleembhutta@debaere.co.uk";
             $orderEmails[]="orders@debaere.co.uk";
 
         }
@@ -174,8 +176,8 @@ class OrderController extends Controller
         //$orderEmails[]=$order->customer->user->email;
         \Mail::to($orderEmails)->send(new OrderEmail($order));
     }
-
-    public function getMinOrderPrice(Request $request)
+    
+     public function getMinOrderPrice(Request $request)
     {   
         $data = $request->json()->all();
         $user = auth('api')->user();
