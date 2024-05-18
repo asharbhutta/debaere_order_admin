@@ -22,6 +22,7 @@
                                     <th scope="col">Name</th>
                                     <th scope="col">Sliced</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col">Sequence</th>
                                 </tr>
                                  <tr>
                                     <x-offering-search-form />

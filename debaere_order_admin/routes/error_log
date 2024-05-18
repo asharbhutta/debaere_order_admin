@@ -1,0 +1,48 @@
+[09-May-2023 14:28:45 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Support\Facades\Route' not found in /home3/asharbhu/debaereorder.asharbhutta.com/routes/web.php:31
+Stack trace:
+#0 {main}
+  thrown in /home3/asharbhu/debaereorder.asharbhutta.com/routes/web.php on line 31
+[09-May-2023 14:28:45 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Support\Facades\Broadcast' not found in /home3/asharbhu/debaereorder.asharbhutta.com/routes/channels.php:16
+Stack trace:
+#0 {main}
+  thrown in /home3/asharbhu/debaereorder.asharbhutta.com/routes/channels.php on line 16
+[09-May-2023 14:28:45 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Support\Facades\Artisan' not found in /home3/asharbhu/debaereorder.asharbhutta.com/routes/console.php:17
+Stack trace:
+#0 {main}
+  thrown in /home3/asharbhu/debaereorder.asharbhutta.com/routes/console.php on line 17
+[09-May-2023 14:28:45 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Support\Facades\Route' not found in /home3/asharbhu/debaereorder.asharbhutta.com/routes/api.php:12
+Stack trace:
+#0 {main}
+  thrown in /home3/asharbhu/debaereorder.asharbhutta.com/routes/api.php on line 12
+[07-Aug-2023 12:48:09 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Support\Facades\Artisan' not found in /home3/asharbhu/debaereorder.asharbhutta.com/routes/console.php:17
+Stack trace:
+#0 {main}
+  thrown in /home3/asharbhu/debaereorder.asharbhutta.com/routes/console.php on line 17
+[07-Aug-2023 12:48:09 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Support\Facades\Route' not found in /home3/asharbhu/debaereorder.asharbhutta.com/routes/web.php:31
+Stack trace:
+#0 {main}
+  thrown in /home3/asharbhu/debaereorder.asharbhutta.com/routes/web.php on line 31
+[07-Aug-2023 12:48:09 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Support\Facades\Route' not found in /home3/asharbhu/debaereorder.asharbhutta.com/routes/api.php:12
+Stack trace:
+#0 {main}
+  thrown in /home3/asharbhu/debaereorder.asharbhutta.com/routes/api.php on line 12
+[07-Aug-2023 12:48:09 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Support\Facades\Broadcast' not found in /home3/asharbhu/debaereorder.asharbhutta.com/routes/channels.php:16
+Stack trace:
+#0 {main}
+  thrown in /home3/asharbhu/debaereorder.asharbhutta.com/routes/channels.php on line 16
+[25-Oct-2023 00:44:29 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Support\Facades\Broadcast' not found in /home3/asharbhu/debaereorder.asharbhutta.com/routes/channels.php:16
+Stack trace:
+#0 {main}
+  thrown in /home3/asharbhu/debaereorder.asharbhutta.com/routes/channels.php on line 16
+[25-Oct-2023 00:44:30 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Support\Facades\Artisan' not found in /home3/asharbhu/debaereorder.asharbhutta.com/routes/console.php:17
+Stack trace:
+#0 {main}
+  thrown in /home3/asharbhu/debaereorder.asharbhutta.com/routes/console.php on line 17
+[25-Oct-2023 00:44:30 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Support\Facades\Route' not found in /home3/asharbhu/debaereorder.asharbhutta.com/routes/web.php:31
+Stack trace:
+#0 {main}
+  thrown in /home3/asharbhu/debaereorder.asharbhutta.com/routes/web.php on line 31
+[25-Oct-2023 00:44:30 UTC] PHP Fatal error:  Uncaught Error: Class 'Illuminate\Support\Facades\Route' not found in /home3/asharbhu/debaereorder.asharbhutta.com/routes/api.php:12
+Stack trace:
+#0 {main}
+  thrown in /home3/asharbhu/debaereorder.asharbhutta.com/routes/api.php on line 12

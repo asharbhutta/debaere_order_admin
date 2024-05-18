@@ -64,8 +64,9 @@ class Product extends Model
          if ($request->filled('sliced')) {
             $data->Where('sliced', 'like', "%" . $request->input('sliced') . "%");
         }
-    
-        $data->orderBy('created_at', 'desc');
+        
+
+        $data->orderBy('sequence');
         
         return $data->paginate(20);
     }
@@ -110,8 +111,15 @@ class Product extends Model
             'storage'=>$product->storage,
             'sliceOption'=>$sliceOption,
             'enable_notes'=>$product->enable_notes,
-            'price'=>round($price,2),
-            'prior_notice'=>$product->prior_notice
+            'price'=>number_format((float)$price, 2, '.', ''),
+            'prior_notice'=>$product->prior_notice,
+            'sun'=>$product->sun,
+            'mon'=>$product->mon,
+            'tue'=>$product->tue,
+            'wed'=>$product->wed,
+            'thru'=>$product->thru,
+            'fri'=>$product->fri,
+            'sat'=>$product->sat
 
             ];
         }

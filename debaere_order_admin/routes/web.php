@@ -8,8 +8,8 @@ use App\Models\Order;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\CustomerPricesController;
+use App\Http\Controllers\HolidayDatesController;
 use App\Http\Controllers\HomeController;
-
 
 
 
@@ -82,6 +82,7 @@ Route::group(
             Route::get('offering/{id}/edit', [OfferingController::class, 'edit'])->name('_offering_edit');
             Route::post('offering/{id}/edit', [OfferingController::class, 'edit'])->name('_offering_edit');
             Route::get('offering/admin', [OfferingController::class, 'admin'])->name('_offering_admin');
+            Route::post('offering/updateSequence', [OfferingController::class, 'updateSequence'])->name('_offering_update_sequence');
 
             Route::get('product/create', [ProductController::class, 'create'])->name('_product_create');
             Route::post('product/create', [ProductController::class, 'create'])->name('_product_create');
@@ -90,29 +91,22 @@ Route::group(
             Route::get('product/admin', [ProductController::class, 'admin'])->name('_product_admin');
             Route::get('product/imageManipulate', [ProductController::class, 'manipulateProductImages'])->name('_product_manipulate');
             Route::post('product/updateSequence', [ProductController::class, 'updateSequence'])->name('_product_update_sequence');
-        
+            Route::get('holidayDates/index', [HolidayDatesController::class, 'index'])->name('_holidayDates');
+            Route::post('holidayDates/index', [HolidayDatesController::class, 'index'])->name('_holidayDates');
+            Route::delete('holidayDates/delete/{id}', [HolidayDatesController::class, 'delete'])->name('_deleteHoliday');
+
             Route::get('orders/admin', [OrdersController::class, 'admin'])->name('_order_admin');
             Route::get('orders//{id}/view', [OrdersController::class, 'view'])->name('_order_view');
             Route::get('product/{id}/replicate', [ProductController::class, 'replicate'])->name('_product_replicate');
 
             Route::post('promotion/index', [PromotionController::class, 'index'])->name('_promotion_index');
             Route::get('promotion/index', [PromotionController::class, 'index'])->name('_promotion_index');
-
+            
             Route::post('pricing/import', [CustomerPricesController::class, 'import'])->name('_customer_pricing_import');
             Route::get('pricing/import', [CustomerPricesController::class, 'import'])->name('_customer_pricing_import');
             Route::get('pricing/priceList', [CustomerPricesController::class, 'allCustomerPriceList'])->name('_customer_pricing_list');
             Route::get('pricing/{id}/customerPrices', [CustomerPricesController::class, 'customerPrices'])->name('_customer_pricing_edit');
             Route::get('/backup_db', [App\Http\Controllers\HomeController::class, 'backupDB'])->name('backup');
-
-
-
-
-
-
-
-
-
-
 
         });
 

@@ -12,6 +12,7 @@ use App\Mail\OrderEmail;
 use App\Models\Promotion;
 use App\Models\Product;
 use App\Events\OrderisCreated;
+use Carbon\CarbonPeriod;
 
 
 
@@ -49,8 +50,28 @@ class OrderController extends Controller
         $min_order_price=$customer->min_order_price;
         $dilivery_charges=$customer->dilivery_charges;
         $totalOrderPrice=0;
+        $currDate = date('Y-m-d');
+        $validDate=true;
+        
+          $dateOrder = new \DateTime($data["order_date"]);
+         $today = new \DateTime($currDate);
+         $dayDiff = $dateOrder->diff($today)->format("%a"); //3
+        
+        if($currDate==$data["order_date"])
+        {
+            $validDate=false;
+        }
+        
+        if($dayDiff==1)
+        {
+            if(date('H')>11)
+            {
+                $validDate=false;
+            }
+        }
 
-        if(isset($data) && isset($data["order_date"]) && isset($data["order_products"]))
+
+        if(isset($data) && isset($data["order_date"]) && isset($data["order_products"]) && $validDate)
         {
             $orderDate=$data["order_date"];
             $orderProducts=$data["order_products"];
@@ -96,8 +117,8 @@ class OrderController extends Controller
                 $order->update();
             }
 
-            event(new OrderisCreated($order));
-          //  $this->sendOrderEmail($order);
+           // event(new OrderisCreated($order));
+            $this->sendOrderEmail($order);
 
             return response()->json([
                 'status' => 'success',
@@ -134,7 +155,7 @@ class OrderController extends Controller
                     $optionText="unsliced";
                 }
 
-                $pOrder=["id"=>$op->product_id,"name"=>$op->product->name,"count"=>$op->count,"sliced"=>$op->sliced,"optionText"=>$optionText,"unit_price"=>$op->unit_price];
+                $pOrder=["id"=>$op->product_id,"name"=>$op->product->name,"count"=>$op->count,"sliced"=>$op->sliced,"optionText"=>$optionText,"price"=>$op->unit_price];
                 if($optionText!="N/A")
                 $pOrder["sliceOption"]=$optionText;
                 
@@ -160,21 +181,21 @@ class OrderController extends Controller
 
     public function sendOrderEmail($order)
     {
-        $orderEmails=[];
-        $orderEmails[]="asharbhutta@gmail.com";
+    //     $orderEmails=[];
+    //   //  $orderEmails[]="asharbhutta@gmail.com";
         
-        if($order->customer->user->email!="bhuttaashar@gmail.com")
-        {
-           // $orderEmails[]="kaleembhutta@debaere.co.uk";
-            $orderEmails[]="orders@debaere.co.uk";
+    //     if($order->customer->user->email!="bhuttaashar@gmail.com")
+    //     {
+    //       // $orderEmails[]="kaleembhutta@debaere.co.uk";
+    //       // $orderEmails[]="orders@debaere.co.uk";
 
-        }
+    //     }
         
         \Mail::to($order->customer->user->email)->send(new OrderEmail($order));
-        $order->confirm_order=true;
+        // $order->confirm_order=true;
         
-        //$orderEmails[]=$order->customer->user->email;
-        \Mail::to($orderEmails)->send(new OrderEmail($order));
+        // //$orderEmails[]=$order->customer->user->email;
+        // \Mail::to($orderEmails)->send(new OrderEmail($order));
     }
     
      public function getMinOrderPrice(Request $request)

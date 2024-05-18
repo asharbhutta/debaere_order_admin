@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Events\OrderisCreated;
+use Illuminate\Support\Facades\DB;
+
 
 class HomeController extends Controller
 {
@@ -25,7 +27,52 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home.dashboard');
+        $date=date("Y-m-d");
+        $cid=null;
+        $message='';
+        if(isset($_GET["date"]))
+        {
+            $date=$_GET["date"];
+        }
+        
+        $message="Product order summary for ".date("d-m-Y ,D",strtotime($date));
+        
+        
+        if(!isset($_GET["end_date"]))
+        {
+            $results = DB::select("SELECT p.name,sum(op.count) as pcount ,p.id as pid,p.product_number as code,of.name as of_name FROM `order_products` 
+            op inner join orders o on o.id=op.order_id inner join products p on p.id=op.product_id inner join offerings of on of.id=p.offering_id
+            where o.date='".$date."'   group by op.product_id,p.name,p.id,p.product_number,of_name order by p.product_number");
+            
+        }
+        else
+        {
+            $endDate=$_GET["end_date"];
+            $message=$message." - ".date("d-m-Y ,D",strtotime($endDate));
+            $statement="SELECT p.name,sum(op.count) as pcount ,p.id as pid,p.product_number as code,of.name as of_name FROM `order_products` 
+            op inner join orders o on o.id=op.order_id inner join products p on p.id=op.product_id inner join offerings of on of.id=p.offering_id
+            where o.date BETWEEN '".$date."' AND '".$endDate."' ";
+            
+            if(isset($_GET["offering_id"]) && !empty($_GET["offering_id"]))
+            {
+                $statement=$statement." AND p.offering_id=".$_GET["offering_id"];
+            }
+            
+            $statement=$statement."  group by op.product_id,p.name,p.id,p.product_number,of_name order by p.product_number";
+            
+            
+            
+             $results = DB::select($statement);
+        }
+
+        
+        
+        
+       $data=[];
+       $data["results"]=$results;
+        $data["message"]=$message;
+
+        return view('home.dashboard')->with('data',$data);
     }
 
     public function backupDB(){

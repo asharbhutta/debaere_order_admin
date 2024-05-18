@@ -13,7 +13,8 @@ class Offering extends Model
             "description",
             "status",
             "sliced" ,
-            "icon"
+            "icon",
+            "sequence"
     ];
     use HasFactory;
 
@@ -51,7 +52,7 @@ class Offering extends Model
             $data->Where('status', '=', $request->input('status'));
         }
        
-        $data->orderBy('created_at', 'desc');
+        $data->orderBy('sequence');
         
         return $data->paginate(20);
     }
@@ -71,7 +72,7 @@ class Offering extends Model
     public static function getActiveOfferings()
     {
         $arr=[];
-        $offerings=Offering::Where('status','=',1)->get();
+        $offerings=Offering::Where('status','=',1)->orderBy('sequence')->get();
         foreach($offerings as $offering)
         {
             $arr[]=["id"=>$offering->id,

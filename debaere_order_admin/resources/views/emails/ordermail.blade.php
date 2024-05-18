@@ -52,8 +52,16 @@ tr:nth-child(even) {
 
 
    </style>
-
+   
    <?php
+   
+   $printUrl="https://debaereorder.asharbhutta.com/public/mailview/".$order->id."?print=1";
+   $confirmOrderUrl="https://debaereorder.asharbhutta.com/public/send-confirm-order-mail/".$order->id;
+
+   
+   ?>
+   
+    <?php
     $totalPrice=0;
    ?>
 
@@ -61,10 +69,10 @@ tr:nth-child(even) {
 </head>
 <body style=" margin:10px;" >
     <div style="text-align:center; margin:5px;">
-              <img src="{{ URL::asset('img/debaere_logo.png') }}" style="width:30%" >
+              <img src="https://debaereorder.asharbhutta.com/public/img/debaere_logo.png" style="width:30%" >
     </div>
     
-     <?php if($order->confirm_order==true){ ?> <a target="blank" href="{{ route('confirm_order_mail',['id'=>$order->id]) }}" >Send Confirmation Email</a>
+     <?php if($order->confirm_order==true){ ?> <a target="blank" href="{{ $confirmOrderUrl }}" >Send Confirmation Email</a>
         <br>
      <a target="blank" href="mailto:{{$order->customer->user->email}}" subject="Order # {{ $order->order_no }}"  >Reply To Customer</a>
      <?php } ?> 
@@ -75,7 +83,7 @@ tr:nth-child(even) {
             <thead>
               <tr>
                     <td style="width:33.3%;   text-align:left;" >
-                        PO# {{$order->order_no}}</b> <?php if(!isset($_GET["print"])){ ?> <a target="blank" href="{{ route('mailview',['id'=>$order->id,'print'=>true]) }}" >Print</a>  <?php } ?> 
+                        PO# {{$order->order_no}}</b> <?php if(!isset($_GET["print"])){ ?> <a target="blank" href="{{ $printUrl }}" >Print</a>  <?php } ?> 
                     </td>
                     <td style="width:33.3%;   text-align:left;" >
                         CN# {{$order->customer->customer_number}}
@@ -144,10 +152,9 @@ tr:nth-child(even) {
         <table>
             <thead>
                 <tr>
-                    <th width="30%" >ORDERED ON</th>
-                    <th width="20%">ORDERED BY</th>
-                    <th width="20%" >DELIVERY DATE</th>
-                    <th width="15%" >BETWEEN</th>
+                    <th width="33%" >ORDERED ON</th>
+                    <th width="33%">ORDERED BY</th>
+                    <th width="33%" >DELIVERY DATE</th>
                 </tr>
             </thead>
             <tbody>
@@ -155,7 +162,6 @@ tr:nth-child(even) {
                 <td>{{ date('d/m/Y H:i:s', strtotime($order->created_at)); }}</td>
                 <td>{{ $order->customer->company_name }}</td>
                 <td> {{ date('d/m/Y', strtotime($order->date)); }} </td>
-                <td>24 Hours</td>
                 </tr>
             </tbody>
         </table>
@@ -163,7 +169,7 @@ tr:nth-child(even) {
 
     <?php  $products=$order->orderProducts ?>
 
-    <table style="margin-top:10px;" > 
+  <table style="margin-top:10px;" > 
         <thead>
         <tr>
             <th width="10%" >Product#</th>
@@ -202,7 +208,7 @@ tr:nth-child(even) {
             </tr>
         </tbody>
     </table>
-</body>
+    </body>
 </html>
 
 <?php if(isset($_GET["print"])) { ?>

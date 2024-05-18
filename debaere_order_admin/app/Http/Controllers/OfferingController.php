@@ -161,4 +161,11 @@ class OfferingController extends Controller
     {
         //
     }
+    
+    public function updateSequence(Request $request)
+    {
+        $model=Offering::findOrFail($request->id);
+        $model->sequence=$request->sequence;
+        $model->update();
+    }
 }

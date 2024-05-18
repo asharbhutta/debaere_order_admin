@@ -4,6 +4,7 @@
      <td>
          <input name="order_no" type="text" value="{{ Request::get('order_no') }}" class="form-control">
      </td>
+     <td></td>
      <td>
         <input name="customer_name" type="text" value="{{ Request::get('customer_name') }}" class="form-control">
      </td>

@@ -25,8 +25,13 @@ class Order extends Model
         if ($request->filled('customer_name')) {
             $data->Where('customer_name', 'like', "%" . $request->input('customer_name') . "%");
         }
+        
         if ($request->filled('date')) {
             $data->Where('date', '=', $request->input('date'));
+        }
+        else
+        {
+            $data->Where('date', '>', '2024-01-01');
         }
        
         $data->orderBy('created_at', 'desc');
@@ -65,5 +70,16 @@ class Order extends Model
     public function orderProducts()
     {
         return $this->hasMany(OrderProduct::class, 'order_id');
+    }
+    
+    public function orderPrice()
+    {
+        $orderPrice=0;
+        foreach($this->orderProducts as $op)
+        {
+            $orderPrice=$orderPrice + ($op->unit_price * $op->count);
+        }
+
+        return $orderPrice;
     }
 }

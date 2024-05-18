@@ -11,6 +11,8 @@ use Redirect;
 use Illuminate\Validation\Rule; //import Rule class 
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use App\Models\ProductImages;
+use App\Models\CustomerProductPrices;
+
 
 
 
@@ -72,14 +74,41 @@ class ProductController extends Controller
                 "sliced"=>"max:20",
                 'enable_notes'=>'numeric',
                 'sequence'=>'numeric',
-                'prior_notice'=>'numeric'
-
-
+                'prior_notice'=>'numeric',
+                'sun'=>'numeric',
+                'mon'=>'numeric',
+                'tue'=>'numeric',
+                'wed'=>'numeric',
+                'thru'=>'numeric',
+                'sat'=>'numeric',
+                'fri'=>'numeric',
 
             ]);
 
-
+        
             $validatedData["description"]=strip_tags($validatedData["description"]);
+              if(!isset($validatedData["sun"]))
+                $validatedData["sun"]=0;
+
+              if(!isset($validatedData["mon"]))
+                $validatedData["mon"]=0;
+
+              if(!isset($validatedData["tue"]))
+                $validatedData["tue"]=0;
+
+              if(!isset($validatedData["wed"]))
+                $validatedData["wed"]=0;
+
+            if(!isset($validatedData["thru"]))
+                $validatedData["thru"]=0;
+
+            if(!isset($validatedData["sat"]))
+                $validatedData["sat"]=0;
+
+            if(!isset($validatedData["fri"]))
+                $validatedData["fri"]=0;
+
+
             $model=$model->create($validatedData);
 
             if($request->hasFile('image'))
@@ -164,19 +193,48 @@ class ProductController extends Controller
                 "storage" => "max:555",
                 "sliced"=>"max:20",
                 'enable_notes'=>'numeric',
-                'sequence'=>'numeric',
-                'prior_notice'=>'numeric'
+                'prior_notice'=>'numeric',
+                 'sun'=>'numeric',
+                'mon'=>'numeric',
+                'tue'=>'numeric',
+                'wed'=>'numeric',
+                'thru'=>'numeric',
+                'sat'=>'numeric',
+                'fri'=>'numeric',
 
 
             ]);
 
             $validatedData["description"]=strip_tags($validatedData["description"]);
+             if(!isset($validatedData["sun"]))
+                $validatedData["sun"]=0;
+
+              if(!isset($validatedData["mon"]))
+                $validatedData["mon"]=0;
+
+              if(!isset($validatedData["tue"]))
+                $validatedData["tue"]=0;
+
+              if(!isset($validatedData["wed"]))
+                $validatedData["wed"]=0;
+
+            if(!isset($validatedData["thru"]))
+                $validatedData["thru"]=0;
+
+            if(!isset($validatedData["sat"]))
+                $validatedData["sat"]=0;
+
+            if(!isset($validatedData["sun"]))
+                $validatedData["sun"]=0;
+            
+              if(!isset($validatedData["fri"]))
+                $validatedData["fri"]=0;
 
 
 
-           
 
-            $model=$model->update($validatedData);
+
+            $model->update($validatedData);
             if($request->hasFile('image'))
             {  
                 ProductImages::where('product_id',$id)->delete();
@@ -184,6 +242,12 @@ class ProductController extends Controller
                 $pImage->path = cloudinary()->upload($request->file('image')->getRealPath())->getSecurePath();
                 $pImage->product_id=$id;
                 $pImage->save();
+            }
+            
+            if(isset($_POST["update_price"]) && $_POST["update_price"]=="1")
+            {
+               CustomerProductPrices::where('product_id','=',$model->id)->update(['price' => $model->price]);
+
             }
 
 

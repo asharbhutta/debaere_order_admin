@@ -29,6 +29,9 @@ class CustomerPricesController extends Controller
 
     public function import(Request $request)
     {
+        set_time_limit(200);
+
+
         $errors=[];
         if($request->hasFile('file'))
         {
@@ -188,6 +191,10 @@ class CustomerPricesController extends Controller
                         $cPriceModel=new CustomerProductPrices;
                         $cPriceModel->customer_id=$customer_id;
                         $cPriceModel->product_id=$simProduct->id;;
+                        
+                        if(empty($v))
+                        $v=$mainProduct->price;
+                        
                         $cPriceModel->price=$v;
 
                         $cPriceModel->save();
@@ -211,10 +218,10 @@ class CustomerPricesController extends Controller
         }
     }
 
-    public function allCustomerPriceList(Request $request)
+     public function allCustomerPriceList(Request $request)
     {
         $product_ids=[];
-        $uniqueProducts=DB::select('SELECT DISTINCT product_id,products.product_number,products.name FROM customer_product_prices INNER JOIN products ON customer_product_prices.product_id = products.id order by products.product_number');
+        $uniqueProducts=DB::select('SELECT DISTINCT product_id,products.product_number,products.name,products.price FROM customer_product_prices INNER JOIN products ON customer_product_prices.product_id = products.id order by products.product_number');
         $masterArr=[];
         $headerArr=[];
         $productNameArr=[];
@@ -232,7 +239,7 @@ class CustomerPricesController extends Controller
         {
             $product_ids[]=$product->product_id;
             array_push($headerArr,$product->product_number);
-            array_push($productNameArr,$product->name);
+            array_push($productNameArr,$product->name." (".$product->price." £)");
         }
 
         $masterArr[]=$headerArr;

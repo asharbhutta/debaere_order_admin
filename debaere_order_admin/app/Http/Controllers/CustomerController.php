@@ -153,6 +153,7 @@ class CustomerController extends Controller
                 "customer_number"=>"max:255" ,
                 "min_order_price"=>"required",
                 'dilivery_charges'=>'numeric',
+
                 'email' => Rule::unique('users')->ignore($customer->user_id),
             ]);
 

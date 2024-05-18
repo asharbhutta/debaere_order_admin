@@ -38,6 +38,10 @@ class OrdersController extends Controller
     public function view($id)
     {
         $order=Order::findOrFail($id);
+        $order->viewed=1;
+        $order->save();
+        $order->confirm_order=true;
+        
         return view('emails.ordermail')->with("order", $order)->with("title", "Create Product"); 
 
     }

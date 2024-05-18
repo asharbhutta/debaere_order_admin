@@ -6,7 +6,7 @@
      </td>
     
      <td>
-        <input name="contact_number" type="text" value="{{ Request::get('customer_number') }}" class="form-control">
+        <input name="customer_number" type="text" value="{{ Request::get('customer_number') }}" class="form-control">
      </td>
      <td>
         <input name="email" type="text" value="{{ Request::get('email') }}" class="form-control">

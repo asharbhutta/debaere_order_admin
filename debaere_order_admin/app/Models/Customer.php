@@ -73,9 +73,6 @@ class Customer extends Model
         if ($request->filled('location')) {
             $data->Where('location', '=', $request->input('location'));
         }
-        if ($request->filled('contact_number')) {
-            $data->Where('contact_number', 'like', "%" . $request->input('contact_number') . "%");
-        }
         if ($request->filled('customer_number')) {
             $data->Where('customer_number', 'like', "%" . $request->input('customer_number') . "%");
         }

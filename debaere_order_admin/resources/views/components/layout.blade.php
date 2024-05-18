@@ -137,7 +137,27 @@
                 }
                 }).done(function( msg ) {
                 
+                });
+
             });
+            
+             $('.offering-sequence-field').change('change',function(){
+
+                var id= $(this).attr('data-id');
+                var val=$(this).val();
+
+                 $.ajax({
+                method: "POST",
+                url: "{{ route('admin_offering_update_sequence') }}",
+                data:{
+
+                     "_token": "{{ csrf_token() }}",
+                     "id": id,
+                     'sequence':val
+                }
+                }).done(function( msg ) {
+                
+                });
 
             });
 

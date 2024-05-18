@@ -13,9 +13,14 @@
     <td>
         <x-boolean-badge :boolean="$member->status" />
     </td>
+      <td>
+        <input type="number" class="offering-sequence-field form-control"  data-id="{{ $member->id }}" value="{{$member->sequence}}">
+    </td>
     <td>
         <td>
               <x-offering-edit-btn text="" :member="$member" />
         </td>
     </td>
+   
+    
 </tr>

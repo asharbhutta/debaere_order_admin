@@ -87,7 +87,18 @@
                 </div>
             </div>
             <hr>
-    
+            
+            <div class="row">
+                <div class="col-sm-4 ml-3 mt-3">
+                     <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="update_price" id="update_price" value="1" >
+                        <label class="form-check-label" for="LondonDist">
+                            Update price for all customers
+                        </label>
+                    </div>
+                    
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-sm-4 ml-3 mt-3">
@@ -119,6 +130,8 @@
                         </label>
                     </div>
                 </div>
+                
+                
 
                  <div class="col-sm-4 ml-3 mt-3">
                      <div class="form-check">
@@ -155,6 +168,47 @@
                         </label>
                     </div>
                 </div>
+
+                <div class="mt-3 ml-3">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name="sun" {{ $product->mon ? "checked" : "" }} value="1">Sunday
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name="mon" {{ $product->mon ? "checked" : "" }} value="1">Monday
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name="tue" {{ $product->tue ? "checked" : "" }} value="1">Tuesday
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name="wed" {{ $product->wed ? "checked" : "" }} value="1">Wednesday
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name="thru" {{ $product->thru ? "checked" : "" }} value="1">Thursday
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name="fri" {{ $product->fri ? "checked" : "" }}  value="1"  >Friday
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name="sat" value="1" {{ $product->sat ? "checked" : "" }} >Saturday
+                        </label>
+                    </div>
+                </div>
+
+             
+
 
             </div>
             <hr>

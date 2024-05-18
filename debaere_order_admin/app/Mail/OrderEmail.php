@@ -32,7 +32,7 @@ class OrderEmail extends Mailable
     public function build()
     {
 
-        return $this->subject('Order Recipt #'.$this->order->order_no) ->markdown('emails.ordermail')
+        return $this->subject('Your Order # is #'.$this->order->order_no) ->markdown('emails.ordermail')
             ->with([
                 'order' => $this->order,
             ]);

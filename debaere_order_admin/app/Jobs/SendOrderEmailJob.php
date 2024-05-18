@@ -47,12 +47,12 @@ class SendOrderEmailJob implements ShouldQueue
     public function sendOrderEmail($order)
     {
         $orderEmails=[];
-        $orderEmails[]="asharbhutta@gmail.com";
+       // $orderEmails[]="asharbhutta@gmail.com";
         
         if($order->customer->user->email!="bhuttaashar@gmail.com")
         {
-            $orderEmails[]="kaleembhutta@debaere.co.uk";
-            $orderEmails[]="orders@debaere.co.uk";
+          //  $orderEmails[]="kaleembhutta@debaere.co.uk";
+          //  $orderEmails[]="orders@debaere.co.uk";
 
         }
         
