@@ -19,11 +19,6 @@ Route::controller(AuthController::class)->group(function () {
 
 Route::controller(DataController::class)->group(function () {
     Route::get('getData', 'getData');
-
-    // Route::post('register', 'register');
-    // Route::post('logout', 'logout');
-    // Route::post('refresh', 'refresh');
-
 });
 
 Route::controller(OrderController::class)->group(function () {

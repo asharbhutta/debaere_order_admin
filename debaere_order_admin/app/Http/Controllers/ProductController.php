@@ -79,7 +79,7 @@ class ProductController extends Controller
                 'mon'=>'numeric',
                 'tue'=>'numeric',
                 'wed'=>'numeric',
-                'thru'=>'numeric',
+                'thu'=>'numeric',
                 'sat'=>'numeric',
                 'fri'=>'numeric',
 
@@ -99,8 +99,8 @@ class ProductController extends Controller
               if(!isset($validatedData["wed"]))
                 $validatedData["wed"]=0;
 
-            if(!isset($validatedData["thru"]))
-                $validatedData["thru"]=0;
+            if(!isset($validatedData["thu"]))
+                $validatedData["thu"]=0;
 
             if(!isset($validatedData["sat"]))
                 $validatedData["sat"]=0;
@@ -198,7 +198,7 @@ class ProductController extends Controller
                 'mon'=>'numeric',
                 'tue'=>'numeric',
                 'wed'=>'numeric',
-                'thru'=>'numeric',
+                'thu'=>'numeric',
                 'sat'=>'numeric',
                 'fri'=>'numeric',
 
@@ -218,8 +218,8 @@ class ProductController extends Controller
               if(!isset($validatedData["wed"]))
                 $validatedData["wed"]=0;
 
-            if(!isset($validatedData["thru"]))
-                $validatedData["thru"]=0;
+            if(!isset($validatedData["thu"]))
+                $validatedData["thu"]=0;
 
             if(!isset($validatedData["sat"]))
                 $validatedData["sat"]=0;
