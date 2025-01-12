@@ -14,9 +14,9 @@ use App\Models\Promotion;
 use App\Models\Product;
 use App\Events\OrderisCreated;
 use App\Http\Requests\ValidateOrderRequest;
-use App\Models\HolidayDate;
+use App\Http\Requests\ValidateOrderDate;
 use Carbon\Carbon;
-use Carbon\CarbonPeriod;
+
 
 
 
@@ -54,22 +54,6 @@ class OrderController extends Controller
         $min_order_price = $customer->min_order_price;
         $dilivery_charges = $customer->dilivery_charges;
         $totalOrderPrice = 0;
-
-        // $dateResponse = $this->validateOrderDate($data);
-        // if (!$dateResponse["status"]) {
-        //     return response()->json([
-        //         'status' => 'error',
-        //         'message' => $dateResponse["message"],
-        //     ], 401);
-        // }
-
-        // $productResponse = $this->validateOrderProducts($data);
-        // if (!$productResponse["status"]) {
-        //     return response()->json([
-        //         'status' => 'error',
-        //         'message' => $productResponse["message"],
-        //     ], 401);
-        // }
 
         if (isset($data) && isset($data["order_date"]) && isset($data["order_products"])) {
             $orderDate = $data["order_date"];
@@ -124,6 +108,16 @@ class OrderController extends Controller
                 'message' => 'Unauthorized',
             ], 401);
         }
+    }
+
+    public function validateOrderDate(ValidateOrderDate $request)
+    {
+        $data = $request->json()->all();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Order Date is Valid',
+        ]);
     }
 
     public function previousOrders(Request $request)
@@ -201,41 +195,6 @@ class OrderController extends Controller
         ]);
     }
 
-    public function validateOrderDate($data)
-    {
-        $currDate = date('Y-m-d');
-        $orderDate = $data["order_date"];
-        $validDate = true;
-        $msg = "";
-        $dateOrder = new \DateTime($orderDate);
-        $today = new \DateTime($currDate);
-        $dayDiff = $dateOrder->diff($today)->format("%a"); //3
-
-
-        if ($currDate == $orderDate) {
-            $validDate = false;
-            $msg = "Order date cannot be today's Date";
-        }
-
-        if ($dayDiff == 1) {
-            if (date('H') > 11) {
-                $validDate = false;
-                $msg = "Order date cannot be today's Date";
-            }
-        }
-
-        $holiday = HolidayDate::where('date', '<=', $orderDate)
-            ->where('end_date', '>=', $orderDate)
-            ->first();
-
-        if ($holiday) {
-            $validDate = false;
-            $msg = $holiday->message;
-        }
-
-        return ["status" => $validDate, "message" => $msg];
-    }
-
     public function validateOrderProducts($data)
     {
         $orderDate = $data["order_date"];
@@ -255,5 +214,62 @@ class OrderController extends Controller
         }
 
         return ["status" => $validateProduct, 'message' => $message];
+    }
+
+    public function toggleFavorite(Request $request)
+    {
+        $data = $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'favorite' => 'required|boolean',
+        ]);
+
+        $user = auth('api')->user();
+        $customer = $user->customer;
+
+        // Retrieve and parse favorite products
+        $favorite_products = $customer->favorite_products
+            ? explode(",", $customer->favorite_products)
+            : [];
+
+        $productId = $data['product_id'];
+
+        // Add or remove the product from the favorite list
+        if ($data['favorite']) {
+            if (!in_array($productId, $favorite_products)) {
+                $favorite_products[] = $productId;
+            }
+        } else {
+            $favorite_products = array_filter($favorite_products, function ($id) use ($productId) {
+                return $id != $productId;
+            });
+        }
+
+        // Update the customer's favorite products
+        $customer->favorite_products = implode(",", $favorite_products);
+        $customer->save();
+
+        // Return success response
+        return response()->json([
+            'status' => 'success',
+            'message' => $data['favorite']
+                ? 'Product is marked favorite successfully.'
+                : 'Product is unmarked favorite successfully.',
+        ]);
+    }
+
+    public function favoriteProducts(Request $request)
+    {
+        $user = auth('api')->user();
+        $customer = $user->customer;
+
+        // Retrieve and parse favorite products
+        $favorite_products = $customer->favorite_products
+            ? explode(",", $customer->favorite_products)
+            : [];
+
+        return response()->json([
+            'status' => 'success',
+            'favorite_products' => $favorite_products,
+        ]);
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -21,33 +22,34 @@ class DataController extends Controller
 
     public function getData()
     {
-        $offerings=Offering::getActiveOfferings();
-        $promotion=Promotion::findOrFail(1);
+        $offerings = Offering::getActiveOfferings();
+        $promotion = Promotion::findOrFail(1);
         $user = auth('api')->user();
-        $customer=$user->customer;
-        $min_order_price=0;
-        $dilivery_charges=0;
-        $customPricesArr=$customer->getCustomPriceArr();
-        $products=Product::getActiveProducts($customPricesArr);
+        $customer = $user->customer;
+        $min_order_price = 0;
+        $dilivery_charges = 0;
+        $customPricesArr = $customer->getCustomPriceArr();
+        $favoriteProducts = explode(",", $customer->favorite_products);
+        $products = Product::getActiveProducts($customPricesArr, $favoriteProducts);
 
 
-        if($customer->min_order_price)
-            $min_order_price=$customer->min_order_price;
-        
-        if($customer->dilivery_charges)
-            $dilivery_charges=$customer->dilivery_charges;
-         
+        if ($customer->min_order_price)
+            $min_order_price = $customer->min_order_price;
+
+        if ($customer->dilivery_charges)
+            $dilivery_charges = $customer->dilivery_charges;
+
         return response()->json([
             'status' => 'success',
-            'min_order_price'=>$min_order_price,
-            'delivery_charges'=>$dilivery_charges,
+            'min_order_price' => $min_order_price,
+            'delivery_charges' => $dilivery_charges,
             'offerings' => $offerings,
             'products' => $products,
-            'promotion'=> $promotion,
+            'promotion' => $promotion,
 
         ]);
     }
-   
+
 
     public function refresh()
     {
@@ -60,5 +62,4 @@ class DataController extends Controller
             ]
         ]);
     }
-
 }
